@@ -1,0 +1,43 @@
+<resources>
+
+    
+    <string name="app_name">Blindroid</string>
+    <string name="servicio">Service</string>
+    <string name="activar">Activate service</string>
+    <string name="activar_desc">Start detection service</string>
+    <string name="inicio">Start at boot</string>
+    <string name="inicio_desc">Start service at OS boot</string>
+    <string name="llamada">Call</string>
+    <string name="altavoz">Speaker</string>
+    <string name="altavoz_desc">Active handsfree</string>
+    <string name="miscelanea">Miscellaneous</string>
+    <string name="sensibilidad">Sensibilty</string>
+    <string name="sensibilidad_desc">Adjust accelerometer sensitivity level</string>
+    <string name="sensibilidad_tit">Select a level</string>
+    <string name="muy_sensible">Very sensitive</string>
+    <string name="sensible">Sensitive</string>
+    <string name="normal">Normal</string>
+    <string name="poco_sensible">Bit sensitive</string>
+    <string name="chuck_norris">Chuck Norris</string>
+    <string name="depuracion">Debug mode</string>
+    <string name="depuracion_desc">Show speech recognition results</string>
+    <string name="pantalla_bloqueo">Lock screen</string>
+    <string name="pantalla_bloqueo_desc">Enable lock screen detection</string>         
+    <string name="ajustes">Settings</string>
+    <string name="busqueda_google">Google search necessary</string>
+    <string name="instalar_ahora">Install now?</string>
+    <string name="despues">Later</string>
+    <string name="instalar">Install</string>
+    <string name="llamar">Call contact</string>
+    <string name="whatsapp">Open Whatsapp chat</string>
+    <string name="accion">Primary action</string>
+    <string name="action_desc">Select primary action</string>
+    <string name="elegir_opcion">Just say contact name in primary</string>
+    <string name="clave_llamar">Secondary action hotword</string>
+    <string name="clave_desc">Choose hotword for secondary action</string>
+    <string name="clave_dialog">You need to say this before contact</string>
+    <string name="voz">Voice</string>
+
+
+
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+   <string-array name="Texto">
+      <item>@string/muy_sensible</item>
+      <item>@string/sensible</item>
+      <item>@string/normal</item>
+      <item>@string/poco_sensible</item>
+      <item>@string/chuck_norris</item>
+   </string-array>
+   <string-array name="valor">
+      <item>20</item>
+      <item>24</item>
+      <item>29</item>
+      <item>36</item>
+      <item>41</item>
+   </string-array>
+</resources>

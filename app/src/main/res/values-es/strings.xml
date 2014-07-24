@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Blindroid</string>
+    <string name="servicio">Servicio</string>
+    <string name="activar">Activar</string>
+    <string name="activar_desc">Iniciar el servicio de detección</string>
+    <string name="inicio">Activar al inicio</string>
+    <string name="inicio_desc">Inicia el servicio en el arranque</string>
+    <string name="llamada">Llamada</string>
+    <string name="altavoz">Altavoz</string>
+    <string name="altavoz_desc">Activa el manos libres</string>
+    <string name="miscelanea">Miscelanea</string>
+    <string name="sensibilidad">Sensibilidad</string>
+    <string name="sensibilidad_desc">Ajusta el nivel de sensibilidad del acelerometro</string>
+    <string name="sensibilidad_tit">Selecciona un nivel</string>
+    <string name="muy_sensible">Muy sensible</string>
+    <string name="sensible">Sensible</string>
+    <string name="normal">Normal</string>
+    <string name="poco_sensible">Poco sensible</string>
+    <string name="chuck_norris">Chuck Norris</string>
+    <string name="depuracion">Modo depuracion</string>
+    <string name="depuracion_desc">Muestra el resultado del reconocimiento de voz</string>
+    <string name="pantalla_bloqueo">Pantalla bloqueo</string>
+    <string name="pantalla_bloqueo_desc">Permite el uso en la pantalla de bloqueo</string>         
+    <string name="ajustes">Ajustes</string>
+    <string name="busqueda_google">Busqueda de Google necesaria</string>
+    <string name="instalar_ahora">¿Instalar ahora?</string>
+    <string name="despues">Mas tarde</string>
+    <string name="instalar">Instalar</string>
+    <string name="llamar">Llamar al contacto</string>
+    <string name="whatsapp">Abrir chat de Whatsapp</string>
+    <string name="accion">Acción primaria</string>
+    <string name="action_desc">Selecciona la opción primaria</string>
+    <string name="elegir_opcion">Solo sera necesario decir el nombre del contacto</string>
+    <string name="clave_llamar">Palabra clave</string>
+    <string name="clave_desc">Palabra clave para la acción secundaria </string>
+    <string name="clave_dialog">Necesitara decir esto antes del contacto</string>
+    <string name="voz">Voz</string>
+
+
+</resources>
