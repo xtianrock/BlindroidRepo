@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppTheme.ExtendedActionBar" parent="android:Theme.Material">
+
+
+        <item name="android:itemTextAppearance">@style/PopupMenu.recipe</item>
+        <item name="android:popupMenuStyle">@style/MyApp.PopupMenu</item>
+        <!-- Main theme colors -->
+        <!--   your app branding color for the app bar -->
+        <item name="android:colorPrimary">@color/verde</item>
+        <!--   darker variant for the status bar and contextual app bars -->
+        <item name="android:colorPrimaryDark">@color/verde</item>
+        <!--   theme UI controls like checkboxes and text fields -->
+        <item name="android:colorAccent">@color/verde</item>
+    </style>
+
+    <style name="MyActionButtonOverflow" parent="android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:src">@drawable/menu</item>
+    </style>
+
+
+    <style name="PopupMenu.recipe" parent="android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:textColor">#FFFFFFFF</item>
+    </style>
+
+    <style name="MyApp.PopupMenu" parent="android:Widget.Holo.Light.ListPopupWindow">
+        <item name="android:popupBackground">#FF27AE60</item>
+    </style>
+
+</resources>

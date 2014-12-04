@@ -1,73 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/servicio">
         <CheckBoxPreference
             android:key="servicio"
-            android:title="@string/activar"
             android:summary="@string/activar_desc"
-           />
-       <CheckBoxPreference 
-           android:title="@string/inicio"
-           android:defaultValue="false" 
-		   android:summary="@string/inicio_desc"
-		   android:key="inicio" 
-		 
-		   />
-    </PreferenceCategory>
-    <PreferenceCategory android:title="@string/voz">
-        <ListPreference
-            android:defaultValue="llamar"
-            android:key="accion"
-            android:title="@string/accion"
-            android:summary="@string/action_desc"
-            android:dialogTitle="@string/elegir_opcion"
-            android:entries="@array/Texto_accion"
-            android:entryValues="@array/valor_accion" />
+            android:title="@string/activar" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="inicio"
+            android:summary="@string/inicio_desc"
+            android:title="@string/inicio"
 
-        <EditTextPreference
-            android:key="hotword"
-            android:title="@string/clave_llamar"
-            android:summary="@string/clave_desc"
-            android:dialogTitle="@string/clave_dialog"
             />
-
-
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/llamada">
-       <CheckBoxPreference 
-           android:title="@string/altavoz"
-           android:defaultValue="false" 
-		   android:summary="@string/altavoz_desc"
-		   android:key="speaker" 
-		  />   
-		   
-     <!--  <CheckBoxPreference 
-           android:title="Nombre contacto"
-           android:defaultValue="false" 
-		   android:summary="Dice el nombre del contacto que llama"
-		   android:key="speak" />   -->  
-	</PreferenceCategory>
-	<PreferenceCategory android:title="@string/miscelanea">
-		<ListPreference
-		android:defaultValue="29"
-		android:key="sensibilidad"
-		android:title="@string/sensibilidad"
-  	    android:summary="@string/sensibilidad_desc"
- 		android:dialogTitle="@string/sensibilidad_tit"
- 		android:entries="@array/Texto"
-  		android:entryValues="@array/valor" />
-		 <CheckBoxPreference 
-           android:title="@string/depuracion"
-           android:defaultValue="false" 
-		   android:summary="@string/depuracion_desc"
-		   android:key="depuracion" />  
-		    <CheckBoxPreference 
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="speaker"
+            android:summary="@string/altavoz_desc"
+            android:title="@string/altavoz" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="colgar"
+            android:summary="@string/colgar_agitando_desc"
+            android:title="@string/colgar_agitando" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="wear"
+            android:summary="@string/android_wear_desc"
+            android:title="@string/android_wear" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/miscelanea">
+        <ListPreference
+            android:defaultValue="29"
+            android:dialogTitle="@string/sensibilidad_tit"
+            android:entries="@array/Texto"
+            android:entryValues="@array/valor"
+            android:key="sensibilidad"
+            android:summary="@string/sensibilidad_desc"
+            android:title="@string/sensibilidad" />
+
+        <!--   <CheckBoxPreference
            android:title="@string/pantalla_bloqueo"
            android:defaultValue="false" 
-		   android:summary="@string/pantalla_bloqueo_desc"
-		   android:key="bloqueo" />  
-		    </PreferenceCategory>
-		    
+           android:summary="@string/pantalla_bloqueo_desc"
+           android:key="bloqueo" />  -->
+    </PreferenceCategory>
+
 </PreferenceScreen>

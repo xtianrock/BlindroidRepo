@@ -17,14 +17,17 @@
  
 
      <!-- put the desired backgrounds here -->
-    <drawable name="statusbar_background">#ff359642</drawable>   
-     <drawable name="action">#ff359642</drawable>
+    <drawable name="statusbar_background">#ff27ae60</drawable>
+    <drawable name="action">#ff27ae60</drawable>
     <drawable name="window_background">#ffFFFFFF</drawable>
 
-     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">     
-        <item name="android:background">#ff359642</item>
-         <item name="android:windowActionBarOverlay">true</item>
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">#ff27ae60</item>
+        <item name="android:icon">@drawable/blindroid_icon</item>
+        <item name="android:windowActionBarOverlay">true</item>
+
     </style>
+
     <style name="AppTheme" parent="android:Theme.Holo.Light">
         <item name="android:windowBackground">@drawable/window_background</item>
     </style>
@@ -36,6 +39,11 @@
     <style name="CustomActionBarTheme"
            parent="@android:style/Theme.Holo">
         <item name="android:windowActionBarOverlay">true</item>
+    </style>
+
+
+    <style name="Theme_Dialog_Translucent" parent="android:Theme.Dialog">
+        <item name="android:windowBackground">@null</item>
     </style>
 
 

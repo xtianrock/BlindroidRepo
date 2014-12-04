@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="verde">#ff27ae61</color>
+    <color name="celeste">#ff389fae</color>
+    <color name="naranja">#ffdb7425</color>
+    <color name="morado">#ff4844ae</color>
+    <color name="rojo">#ffff4a4c</color>
+    <color name="gris">#ff6f6c64</color>
+    <color name="rosa">#ffbc66a0</color>
+    <color name="button_normal">#929392</color>
+    <color name="button_pressed">#c0c1c0</color>
+
+</resources>
