@@ -22,8 +22,6 @@ import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -31,31 +29,29 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
-public class ServiceBoot extends Service implements AccelerometerListener {
+public class BlindroidService extends Service implements IAccelerometerListener, IPhoneStateListener, IProximityListener {
 
 
-    static ArrayList<Contacto> contactos = new ArrayList<Contacto>();
-    boolean screenOff;
+    private boolean screenOff;
+    public enum phoneStates{IDLE,RINGING,OFFHOOK,CALL};
+    public phoneStates state = phoneStates.IDLE;
+    static ArrayList<Contact> contacts = new ArrayList<>();
     ClaseGlobal vGlobal;
     SharedPreferences prefs;
-    BroadcastReceiver mReceiver;
-    TelephonyManager telephonyManager;
-    PhoneStateListener callStateListener;
+    BroadcastReceiver screenReceiver;
     private NotificationManagerCompat notificationManagerCompat;
-    //Vacia los contactos y los vuelve a cargar cuando s eproduce un cambio en la bd contactos.
-    private ContentObserver mObserver = new ContentObserver(new Handler()) {
+
+    //Vacia los contactos y los vuelve a cargar cuando se produce un cambio en la bd contactos.
+    private ContentObserver contactsObserver = new ContentObserver(new Handler()) {
 
         @Override
         public void onChange(boolean selfChange) {
             super.onChange(selfChange);
-            contactos.clear();
+            contacts.clear();
             getNameNumber();
         }
-
     };
 
     @Override
@@ -68,85 +64,27 @@ public class ServiceBoot extends Service implements AccelerometerListener {
     public void onCreate() {
         super.onCreate();
 
-        this.getContentResolver().registerContentObserver(
-                ContactsContract.Contacts.CONTENT_URI, true, mObserver);
+        //Registro el ContentObserver que estará pendiente de cambios en la base de datos de contactos.
+        this.getContentResolver().registerContentObserver(ContactsContract.Contacts.CONTENT_URI, true, contactsObserver);
 
         // instancio el receiver que controla el estado de la pantalla.
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_USER_PRESENT);
-        mReceiver = new OnOffReceiver();
-        registerReceiver(mReceiver, filter);
-        Log.i("xtian", "Servicio creado y receiver registrado");
-
+        screenReceiver = new OnOffReceiver();
+        registerReceiver(screenReceiver, filter);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        vGlobal = (ClaseGlobal) getApplicationContext();
 
-
-        //instancio el listener que detecta si se esta en una llamada o no
-        telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        callStateListener = new PhoneStateListener() {
-            public void onCallStateChanged(int state, String incomingNumber) {
-
-                vGlobal = (ClaseGlobal) getApplicationContext();
-
-                if (state == TelephonyManager.CALL_STATE_IDLE) {
-                    activarAcel();
-                    //Cambia a false la variable global que permite saber si la llamada ha sido realizada con la aplicacion
-                    vGlobal.setLlamando(false);
-                    vGlobal.inCall = false;
-                    if (vGlobal.getNotificationActive()) {
-                        vGlobal.setNotificationActive(false);
-                        notificationManagerCompat = NotificationManagerCompat.from(ServiceBoot.this);
-                        notificationManagerCompat.cancel(002);
-                    }
-
-                } else if (state == TelephonyManager.CALL_STATE_RINGING) {
-                    comprobarYpararAcel();
-                    //Toast.makeText(getBaseContext(), "Llamada entrante: "+incomingNumber+ " " +  vGlobal.getCountryZipCode(),Toast.LENGTH_SHORT).show();
-                    vGlobal.setLlamando(false);
-                    vGlobal.findId(incomingNumber);
-                } else if (state == TelephonyManager.CALL_STATE_OFFHOOK) {
-                    //comprobarYpararAcel();
-                    Log.i("xtian", Boolean.toString(vGlobal.getLlamando()));
-                    if (vGlobal.getLlamando()) {
-                        llamadaBlindroid();
-                    } else {
-                        setSpeaker(false);
-                    }
-                    vGlobal.inCall = true;
-                    final String numero = incomingNumber;
-                    if (prefs.getBoolean("wear", false)) {
-                        vGlobal.setNotificationActive(true);
-                        TimerTask task = new TimerTask() {
-                            @Override
-                            public void run() {
-                                Notification();
-                            }
-                        };
-
-                        Timer timer = new Timer();
-                        timer.schedule(task, 50);
-                    }
-
-
-                }
-            }
-
-
-        };
-        telephonyManager.listen(callStateListener, PhoneStateListener.LISTEN_CALL_STATE);
-
-
-        Toast.makeText(getBaseContext(), R.string.activado,
-                Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(getBaseContext(), R.string.activado,Toast.LENGTH_SHORT).show();
         getNameNumber();
 
+        Log.i("xtian", "onCreate");
 
     }
 
-    private void Notification() {
+    private void wearNotification() {
 
 
         NotificationManagerCompat notificationManagerCompat;
@@ -165,12 +103,12 @@ public class ServiceBoot extends Service implements AccelerometerListener {
 
 // Create the action
         NotificationCompat.Action actionColgar =
-                new NotificationCompat.Action.Builder(R.drawable.ic_action_device_access_end_call,
+                new NotificationCompat.Action.Builder(R.drawable.blindroid_icon,
                         "Colgar", pendingIntentColgar)
                         .build();
 
         NotificationCompat.Action actionSpeaker =
-                new NotificationCompat.Action.Builder(R.drawable.ic_action_device_access_volume_on,
+                new NotificationCompat.Action.Builder(R.drawable.blindroid_icon,
                         "Altavoz", pendingIntentSpeaker)
                         .build();
 
@@ -185,34 +123,18 @@ public class ServiceBoot extends Service implements AccelerometerListener {
                         .addAction(actionSpeaker)
                         .setBackground(BitmapFactory.decodeStream(openPhoto(vGlobal.getIdLlamada()))))
                 .build();
-
         notificationManagerCompat = NotificationManagerCompat.from(this);
         notificationManagerCompat.notify(002, notification);
 
     }
 
-    private void llamadaBlindroid() {
-        if (prefs.getBoolean("speaker", false)) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            setSpeaker(true);
-        } else {
-            setSpeaker(false);
-        }
-
-
-    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         //Creo la notificacion
 
-        Intent ajustes = new Intent(ServiceBoot.this, MainActivity.class);
+        Intent ajustes = new Intent(BlindroidService.this, MainActivity.class);
         PendingIntent touch = PendingIntent.getActivity(this, 0, ajustes, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder bBuilder =
                 new NotificationCompat.Builder(this)
@@ -226,6 +148,7 @@ public class ServiceBoot extends Service implements AccelerometerListener {
         Notification barNotif = bBuilder.build();
         startForeground(1, barNotif);
 
+        PhoneStateReceiver.startListening(this);
 
         try {
             screenOff = intent.getBooleanExtra("screen_state", false);
@@ -233,39 +156,39 @@ public class ServiceBoot extends Service implements AccelerometerListener {
         } catch (Exception e) {
         }
         if (!screenOff) {
-            activarAcel();
+            String sensibilidad = prefs.getString("sensibilidad", "29");
+            if (AccelerometerManager.isSupported(this)) {
+                AccelerometerManager.startListening(this, Integer.parseInt(sensibilidad));
+            }
         } else {
-            comprobarYpararAcel();
+            if (AccelerometerManager.isListening()) {
+                AccelerometerManager.stopListening();
+            }
         }
         Log.i("xtian", "onStartCommand del servicio, screenOff:" + screenOff);
+
 
         // con sticky mantengo el servicio hasta que se le ordene parar
         return START_STICKY;
     }
 
-    private void activarAcel() {
 
-        comprobarYpararAcel();
-        String sensibilidad = prefs.getString("sensibilidad", "29");
-        if (AccelerometerManager.isSupported(this)) {
-
-            //Start Accelerometer Listening
-            AccelerometerManager.startListening(this, Integer.parseInt(sensibilidad));
-        }
-    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
 
-        //Si el sensor esta activo lo desactivo
+        //Desactivo sensores y listeners
+        if (ProximityManager.isListening()) {
+            ProximityManager.stopListening();
+        }
         if (AccelerometerManager.isListening()) {
             AccelerometerManager.stopListening();
             Toast.makeText(getBaseContext(), R.string.desactivado, Toast.LENGTH_SHORT).show();
         }
-        unregisterReceiver(mReceiver);
-        contactos.clear();
-        telephonyManager.listen(callStateListener, PhoneStateListener.LISTEN_NONE);
+        unregisterReceiver(screenReceiver);
+        this.getContentResolver().unregisterContentObserver(contactsObserver);
+        contacts.clear();
         Log.i("xtian", "service onDestroy");
     }
 
@@ -287,7 +210,7 @@ public class ServiceBoot extends Service implements AccelerometerListener {
                 ContactsContract.CommonDataKinds.Phone.NUMBER);
         names.moveToFirst();
         do {
-            //Aqu� relleno los dos
+            //Aqui relleno los dos
             ClaseGlobal vGlobal = new ClaseGlobal();
             //Reemplazo los caracteres acentuados por los normales
             String nombre = vGlobal.reemplazarCaracteresRaros(names.getString(indexName)).toLowerCase();
@@ -297,18 +220,13 @@ public class ServiceBoot extends Service implements AccelerometerListener {
             numero = codPais + numero;
             // Toast.makeText(getBaseContext(),numero,Toast.LENGTH_SHORT).show();
             String id = names.getString(indexID);
-            Contacto cont = new Contacto(nombre, nombreOriginal, numero, id);
-            contactos.add(cont);
+            Contact cont = new Contact(nombre, nombreOriginal, numero, id);
+            contacts.add(cont);
         } while (names.moveToNext());
         names.close();
     }
 
 
-    private void comprobarYpararAcel() {
-        if (AccelerometerManager.isListening()) {
-            AccelerometerManager.stopListening();
-        }
-    }
 
     @Override
     public void onAccelerationChanged(float x, float y, float z) {
@@ -318,19 +236,15 @@ public class ServiceBoot extends Service implements AccelerometerListener {
 
 
     @Override
-    public void onDubleShake(float force) {
-        if (vGlobal.inCall) {
+    public void onDoubleShake(float force) {
+        if (state==phoneStates.OFFHOOK) {
             if (prefs.getBoolean("colgar", false)) {
                 Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 v.vibrate(200);
                 final ClaseGlobal vGlobal = (ClaseGlobal) getApplicationContext();
                 try {
                     vGlobal.colgar();
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
+                } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
                     e.printStackTrace();
                 }
             }
@@ -340,7 +254,7 @@ public class ServiceBoot extends Service implements AccelerometerListener {
     @Override
     public void onShake(float force) {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (!vGlobal.inCall) {
+        if (state==phoneStates.IDLE) {
             v.vibrate(200);
             Intent i = new Intent(this, ReconocimientoVoz.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -369,6 +283,70 @@ public class ServiceBoot extends Service implements AccelerometerListener {
         }
     }
 
+
+    @Override
+    public void onStateIdle() {
+        state=phoneStates.IDLE;
+        if (ProximityManager.isListening())
+            ProximityManager.stopListening();
+        if (vGlobal.getNotificationActive()) {
+            vGlobal.setNotificationActive(false);
+            notificationManagerCompat = NotificationManagerCompat.from(BlindroidService.this);
+            notificationManagerCompat.cancel(002);
+        }
+
+        Log.i("xtian", "Estado idle");
+    }
+
+    @Override
+    public void onStateRinging() {
+        state=phoneStates.RINGING;
+        Log.i("xtian", "Estado ringing");
+    }
+
+    @Override
+    public void onStateOffhook() {
+        state=phoneStates.OFFHOOK;
+        if(ProximityManager.isSupported(this))
+        ProximityManager.startListening(this);
+        vGlobal.setNotificationActive(true);
+        wearNotification();
+        Log.i("xtian", "Estado offHook");
+    }
+
+    @Override
+    public void onStateCall() {
+        state=phoneStates.CALL;
+        Log.i("xtian", "Estado calling");
+    }
+
+    @Override
+    public void near() {
+        if (prefs.getBoolean("speaker", true))
+        {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            setSpeaker(false);
+        }
+        Log.i("xtian", "proximity near");
+    }
+
+    @Override
+    public void far() {
+        if (prefs.getBoolean("speaker", true))
+        {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            setSpeaker(true);
+        }
+        Log.i("xtian", "proximity far");
+    }
 
 }
 

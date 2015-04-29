@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Blindroid</string>
-    <string name="prompt">Diga el nombre del contacto...</string>
+    <string name="prompt">Diga el name del contacto...</string>
     <string name="activado">Blindroid Activado!</string>
     <string name="desactivado">Blindroid desactivado!</string>
     <string name="servicio">Servicio</string>
@@ -15,7 +15,7 @@
     <string name="altavoz_desc">Activa el manos libres</string>
     <string name="miscelanea">Miscelanea</string>
     <string name="sensibilidad">Sensibilidad</string>
-    <string name="sensibilidad_desc">Ajusta la fuerza con la que debes agitar el telefono</string>
+    <string name="sensibilidad_desc">Ajusta la fuerza con la que debes agitar el phone</string>
     <string name="sensibilidad_tit">Selecciona un nivel</string>
     <string name="ultra_sensible">Ultra sensible</string>
     <string name="muy_sensible">Muy sensible</string>
@@ -43,13 +43,14 @@
     <string name="tuto2">Blindroid te permite llamar a tus contactos de manera fácil y rápida...</string>
     <string name="tuto3">...Sin importar que aplicación estés utilizando</string>
     <string name="tuto4">Tan solo agita tu dispositivo, vibrará y aparecerá el cuadro de reconocimiento de voz</string>
-    <string name="tuto5">Cuando oigas el sonido dí el nombre del contacto y listo!</string>
+    <string name="tuto5">Cuando oigas el sonido dí el name del contacto y listo!</string>
     <string name="tuto6">Ahora que sabes como funciona puedes configurarla a tu gusto.</string>
     <string name="abre_ajustes">Pulse para abrir</string>
     <string name="continuar">Pulsa para continuar</string>
     <string name="reintentar">Reintentar</string>
     <string name="cancelar">Cancelar</string>
-    <string name="titulo_dialog">No se encontró el contacto</string>
+    <string name="contact_not_found">No se encontró el contacto</string>
+    <string name="choose_contact">Elija un contacto</string>
     <string name="texto_dialog">No existe ningun contacto que coincida con los resultados del reconocimiento de voz:</string>
     <string name="internet">Recuerda que si tienes acceso a internet obtendrás mejores resultados.</string>
     <string name="colgar_agitando">Colgar Agitando</string>

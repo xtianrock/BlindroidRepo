@@ -135,7 +135,7 @@ public class ScreenSlidePageFragment extends Fragment {
 
     private void iniciarServicio() {
 
-        Intent i = new Intent(this.getActivity(), ServiceBoot.class);
+        Intent i = new Intent(this.getActivity(), BlindroidService.class);
         i.putExtra("screen_state", false);
         getActivity().startService(i);
     }

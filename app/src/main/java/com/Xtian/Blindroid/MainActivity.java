@@ -172,20 +172,20 @@ public class MainActivity extends PreferenceActivity {
 
     private void iniciarServicio() {
 
-        Intent i = new Intent(this, ServiceBoot.class);
+        Intent i = new Intent(this, BlindroidService.class);
         i.putExtra("screen_state", false);
 		 startService(i);
     }
 
   private void detenerServicio() {
-      stopService(new Intent(this, ServiceBoot.class));
+      stopService(new Intent(this, BlindroidService.class));
   }
 
     // funcion que devuelve true o false en funcion de si el servicio esta activo o no
     private boolean isMyServiceRunning() {
 		    ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 		    for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-                if ("com.Xtian.Blindroid.ServiceBoot".equals(service.service.getClassName())) {
+                if ("com.Xtian.Blindroid.BlindroidService".equals(service.service.getClassName())) {
                     return true;
 
                 }
@@ -203,7 +203,7 @@ public class MainActivity extends PreferenceActivity {
 			  InstalarBusquedaGoogle();
 		  }
         actualizarEstadoServicio();
-
+        overridePendingTransition(R.anim.right_in, R.anim.left_out);
 	 }
 
     @Override

@@ -17,14 +17,10 @@ public class ReceiverBoot extends BroadcastReceiver {
         // LANZAR SERVICIO
         if (inicio) {
             if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
-                Intent service = new Intent(context, ServiceBoot.class);
-                service.putExtra("screen_state", false);
+                Intent service = new Intent(context, BlindroidService.class);
                 context.startService(service);
             }
-
         }
-
-
     }
 
 

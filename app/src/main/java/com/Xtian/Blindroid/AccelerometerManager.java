@@ -16,7 +16,7 @@ public class AccelerometerManager {
      * Sensibilidad
      */
     public static int threshold = 30;
-    static AccelerometerListener listener;
+    static IAccelerometerListener listener;
     private static Context aContext = null;
     private static long interval = 900000000;
     /**
@@ -45,7 +45,7 @@ public class AccelerometerManager {
                     synchronized (this) {
                         // use the event timestamp as reference
                         // so the manager precision won't depends
-                        // on the AccelerometerListener implementation
+                        // on the IAccelerometerListener implementation
                         // processing time
                         now = event.timestamp;
 
@@ -80,7 +80,7 @@ public class AccelerometerManager {
                                         listener.onShake(force);
                                     } else if (now - lastShake >= interval / 5 && now - lastShake < interval) {
                                         // trigger double shake event
-                                        listener.onDubleShake(force);
+                                        listener.onDoubleShake(force);
                                     }
 
                                     lastShake = now;
@@ -102,7 +102,7 @@ public class AccelerometerManager {
             };
     private static Sensor sensor;
     private static SensorManager sensorManager;
-    /** indica si el telefono tiene acelerometro */
+    /** indica si el phone tiene acelerometro */
     private static Boolean supported;
     /** indica si el acelerometro esta activo */
     private static boolean running = false;
@@ -163,10 +163,10 @@ public class AccelerometerManager {
 
     /**
      * Registers a listener and start listening
-     * @param accelerometerListener
+     * @param IAccelerometerListener
      *             callback for accelerometer events
      */
-    public static void startListening(AccelerometerListener accelerometerListener) {
+    public static void startListening(IAccelerometerListener IAccelerometerListener) {
 
         sensorManager = (SensorManager) aContext.getSystemService(Context.SENSOR_SERVICE);
 
@@ -177,11 +177,11 @@ public class AccelerometerManager {
 
             sensor = sensors.get(0);
             // Register Accelerometer Listener
-            running = sensorManager.registerListener(sensorEventListener, sensor, SensorManager.SENSOR_DELAY_GAME);
-            listener = accelerometerListener;
-            if (BuildConfig.DEBUG) {
-                Log.i("xtian", "Acelerometro activado");
-            }
+            sensorManager.registerListener(sensorEventListener, sensor, SensorManager.SENSOR_DELAY_GAME);
+            running=true;
+            listener = IAccelerometerListener;
+            Log.i("xtian", "Acelerometro activado");
+
         }
 
 
@@ -190,16 +190,16 @@ public class AccelerometerManager {
     /**
      * Configures threshold and interval
      * And registers a listener and start listening
-     * @param accelerometerListener
+     * @param IAccelerometerListener
      *             callback for accelerometer events
      * @param threshold
      *             minimum acceleration variation for considering shaking
 
      *             minimum interval between to shake events
      */
-    public static void startListening(AccelerometerListener accelerometerListener, int threshold) {
+    public static void startListening(IAccelerometerListener IAccelerometerListener, int threshold) {
         configure(threshold);
-        startListening(accelerometerListener);
+        startListening(IAccelerometerListener);
     }
   
 }

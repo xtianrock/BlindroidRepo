@@ -49,7 +49,8 @@
     <string name="continuar">Click to continue</string>
     <string name="reintentar">Retry</string>
     <string name="cancelar">Cancel</string>
-    <string name="titulo_dialog">Contact not found</string>
+    <string name="contact_not_found">Contact not found</string>
+    <string name="choose_contact">Choose a contact</string>
     <string name="texto_dialog">No contacts match the results of speech recognition:</string>
     <string name="internet">Remember that if you have internet access you will get better results.</string>
     <string name="colgar_agitando">Shake to end call</string>

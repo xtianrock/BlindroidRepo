@@ -74,10 +74,10 @@ public class ClaseGlobal extends Application {
         String countryCode = getCountryZipCode(this);
         String numeroPreparado = prepararNumero(number, countryCode);
         numeroPreparado = countryCode + numeroPreparado;
-        for (int a = 0; a < ServiceBoot.contactos.size(); a++) {
-            if (ServiceBoot.contactos.get(a).getTelefono().equals(numeroPreparado)) {
-                setIdLlamada(Long.valueOf(ServiceBoot.contactos.get(a).getID()).longValue());
-                setNombreLlamada(ServiceBoot.contactos.get(a).getNombreOriginal());
+        for (int a = 0; a < BlindroidService.contacts.size(); a++) {
+            if (BlindroidService.contacts.get(a).getPhone().equals(numeroPreparado)) {
+                setIdLlamada(Long.valueOf(BlindroidService.contacts.get(a).getID()).longValue());
+                setNombreLlamada(BlindroidService.contacts.get(a).getFullName());
                 //   Toast.makeText(getBaseContext(),"OK "+String.valueOf(idLlamada)+nombreLlamada, Toast.LENGTH_SHORT).show();
             }
         }

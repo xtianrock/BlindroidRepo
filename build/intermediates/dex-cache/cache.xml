@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2">
+<items version="2" >
 
     <item
-        jar="C:\Users\2DAWT\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.0\support-annotations-21.0.0.jar"
-        jumboMode="false" revision="21.1.1" sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
-        <dex
-            dex="C:\Users\2DAWT\AndroidStudioProjects\Blindroid1\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.0-1fda7ffe74d6931cf4fae050647d7e5dfbfb5403.jar" />
+        jar="C:\Users\xtianrock\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.0\support-annotations-21.0.0.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
+        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.0-6e7a94ed3134f7477023d1e098200ce34d1dedf1.jar" />
     </item>
     <item
-        jar="C:\Users\2DAWT\AndroidStudioProjects\Blindroid1\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\classes.jar"
-        jumboMode="false" revision="21.1.1" sha1="686344a780033e4ba22b926cd225f8d4941247e6">
-        <dex
-            dex="C:\Users\2DAWT\AndroidStudioProjects\Blindroid1\app\build\intermediates\pre-dexed\debug\classes-1641196d380de54ad25c050a8d14d9428e0186e3.jar" />
+        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\libs\internal_impl-21.0.0.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
+        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.0-cfb2c3bf3bee68a72d31d03e1f8ae4b670754e4d.jar" />
     </item>
     <item
-        jar="C:\Users\2DAWT\AndroidStudioProjects\Blindroid1\libGoogleAnalyticsServices\libGoogleAnalyticsServices.jar"
-        jumboMode="false" revision="21.1.1" sha1="db1e65d9e3ee616f871cb23120fbea8f18ad3e4c">
-        <dex
-            dex="C:\Users\2DAWT\AndroidStudioProjects\Blindroid1\app\build\intermediates\pre-dexed\debug\libGoogleAnalyticsServices-319a6de4fd4a34f301a050f78be80405e3159a99.jar" />
+        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="686344a780033e4ba22b926cd225f8d4941247e6">
+        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-2a24f9edf2db5a9f9c7bf67f5ca32850180eb915.jar" />
     </item>
     <item
-        jar="C:\Users\2DAWT\AndroidStudioProjects\Blindroid1\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\libs\internal_impl-21.0.0.jar"
-        jumboMode="false" revision="21.1.1" sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
-        <dex
-            dex="C:\Users\2DAWT\AndroidStudioProjects\Blindroid1\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.0-7b2467ab0c7818a6b38999dd4c8f271a403e03ac.jar" />
+        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\libGoogleAnalyticsServices\libGoogleAnalyticsServices.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="db1e65d9e3ee616f871cb23120fbea8f18ad3e4c">
+        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\libGoogleAnalyticsServices-d71cb2cdc47cf7495dcf959a1373a5c40f9c15c8.jar" />
     </item>
 
 </items>

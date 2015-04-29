@@ -69,7 +69,7 @@ public class SplashScreen extends FragmentActivity {
         pager.setAdapter(adapter);
 
 
-        final Intent i = new Intent(this, ServiceBoot.class);
+        final Intent i = new Intent(this, BlindroidService.class);
 
         TimerTask task = new TimerTask() {
             @Override
@@ -114,7 +114,7 @@ public class SplashScreen extends FragmentActivity {
 
     private void iniciarServicio() {
 
-        Intent i = new Intent(this, ServiceBoot.class);
+        Intent i = new Intent(this, BlindroidService.class);
         i.putExtra("screen_state", false);
         startService(i);
     }

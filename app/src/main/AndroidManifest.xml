@@ -56,18 +56,14 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
 
         <service
-            android:name=".ServiceBoot"
+            android:name=".BlindroidService"
             android:exported="false">
             <intent-filter>
                 <action android:name="ServiceBoot"></action>
             </intent-filter>
         </service>
 
-        <receiver android:name=".ReceiverBoot">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
-            </intent-filter>
-        </receiver>
+
 
         <activity
             android:name=".ActivityColgar"
@@ -77,14 +73,18 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
 
-        <receiver
-            android:name=".OutgoingCallReceiver"
-            android:enabled="true"
-            android:exported="true">
+        <receiver android:name=".ReceiverBoot">
             <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".PhoneStateReceiver">
+            <intent-filter android:priority="0">
+                <action android:name="android.intent.action.PHONE_STATE" />
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>
