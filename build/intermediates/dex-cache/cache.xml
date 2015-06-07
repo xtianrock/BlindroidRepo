@@ -2,333 +2,193 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="e35fae1b377c23aa5fd2d309a190c2d0f73d54ec">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-e2e6177e37754ffa0be6470a9b8dd7936c83d085.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="6046e5cdaf799120b7c56a5a061d80e8854c4d34">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-2b755e4f5be1c7c28c2263dbf7abeba007519e2d.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\classes.jar"
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\Blindroid\emojis\unspecified\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="fe3e0c6de7cceed888b277487238b6af9a1cc299">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-84b557dcbec20a419b39790e235daa555cd67dd1.jar" />
+        sha1="56bd1c733dee8f09113050ddb61976e2fe0d5965">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-8b8a58da7b319a2a497a447ca75faf4aa513f958.jar" />
     </item>
     <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="7215ac1f2fca947b9415a6ee2a1bf991364aab24">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-0dcaedf6a2b0808f1a17138afcfa0b19c4e4efec.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\classes.jar"
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="b48d5c51a9a9e329005106b4667f54948de4d4d8">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-70f8ecdba5fdb051820079f88e2b64972fd9d149.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="0180d031a7b54dabb93b4af3869468b55dc938bd">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-1aa64df8de8bc498d2950dc5b79851b25bdc4ff2.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="bb36004beb02b69562cbec9aa7d6a3cf16bf5d1b">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-15bee9ee93e42c44d923b905cf11d0da85725fd6.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="4f4fe3c23776540625f3c2844152a7510fddf9f1">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-a0ad0aaea6ce6566b7312bc8d85bb8eee967632e.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="5ea948d825957be6c4358c48422bee60eef2d487">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-a3140df1ad966d073f0b98789eb1aa69bb7e7f61.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="59652857a825fff0de62166fca1bc9553cc01abb">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-3679555a0795e4c3d774b522128118d900eedf80.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="565a01f90f1529f73362707c4c185d0623a68782">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-9af4c2ed7d8865bb664161e0adad277c2e4428f5.jar" />
+        sha1="e5bf453b070c1e39297986144960e45afa0fdfad">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-e861af85b04952877b8165ad67a0e16a91b2bed3.jar" />
     </item>
     <item
         jar="C:\Users\xtianrock\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-8feb0422c28492d2cf875875a948642dce990e66.jar" />
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-8feb0422c28492d2cf875875a948642dce990e66.jar" />
     </item>
     <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.pnikosis\materialish-progress\1.5\classes.jar"
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="75c54c470e19b251749e6e6c2cf3d73c0b50aa64">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-47fbd8a57a3ca4dc142b17851a9de84f572b259e.jar" />
+        sha1="b48d5c51a9a9e329005106b4667f54948de4d4d8">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-f5003672b534efb7694a9852b7d6edcef1dd4a33.jar" />
     </item>
     <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="0708ef60917bf94913fe9ef972a655b99462dca7">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-d0f754857435d8bc98a878a9fcbb70f5634c016f.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-b1588d6517eda98ca063504d11a885edae50d957.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-23ec267d931c86ff6129725ec3333eec93ea6f67.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\classes.jar"
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="9c9dea9e85aceb09d95df5e6f7bc8a43fc286068">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-dd9f3695df266b1e82bdfb4f5f9aaea0389f6da5.jar" />
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-d74e35999634738b4fc59cd1c37b3849cf9fde29.jar" />
     </item>
     <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-2369c80ce5ce308cd9155d3c5757d7a7e6637369.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="3b4ff5c39dace8f3b4ab4cab8191785547a0815f">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-1aaa373084a042840611a0c8caa056eb222a0692.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="e5b9f5b0aa8dee788beb63d23832cb29ce771343">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-183c48ad9027649e6feb88295374ed738cee9980.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\libs\internal_impl-22.1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-c3139eadb29c4fd0ff4e1607ce7e44b0957f1dad.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="b2c07cdb814fe988ad05f7b4d767a841514a5991">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-f636ee84cd22e5cd7dd53082578c384b076416c4.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a0ce76dfaccbfbd6c551ed2174280aaabe60fe47">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-d911e795096509c3ccacd0d84d7d19daea363db9.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="e5bf453b070c1e39297986144960e45afa0fdfad">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-3b52321b62c88167fbf68454a3e8f753475e7a99.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-0ce7352a455d027cf5f0eb5904d81ce76595877d.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="0708ef60917bf94913fe9ef972a655b99462dca7">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-d0f754857435d8bc98a878a9fcbb70f5634c016f.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="565a01f90f1529f73362707c4c185d0623a68782">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-9af4c2ed7d8865bb664161e0adad277c2e4428f5.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.3.0\classes.jar"
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="e35fae1b377c23aa5fd2d309a190c2d0f73d54ec">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-e2e6177e37754ffa0be6470a9b8dd7936c83d085.jar" />
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-a75f20a8ad7aca12663de0f6d715bdad99768d61.jar" />
     </item>
     <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\classes.jar"
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\libs\internal_impl-22.1.1.jar"
         jumboMode="false"
-        revision="21.1.1"
-        sha1="fe3e0c6de7cceed888b277487238b6af9a1cc299">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-84b557dcbec20a419b39790e235daa555cd67dd1.jar" />
+        revision="21.1.2"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-580bb4b1dd79f0c864cd2b6cb39bac588c862778.jar" />
     </item>
     <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.3.0\classes.jar"
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="6046e5cdaf799120b7c56a5a061d80e8854c4d34">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-2b755e4f5be1c7c28c2263dbf7abeba007519e2d.jar" />
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-8ee2d1c3d0a136804c54854e82c6bb279730f3f3.jar" />
     </item>
     <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="b48d5c51a9a9e329005106b4667f54948de4d4d8">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-70f8ecdba5fdb051820079f88e2b64972fd9d149.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4f4fe3c23776540625f3c2844152a7510fddf9f1">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-a0ad0aaea6ce6566b7312bc8d85bb8eee967632e.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.3.0\classes.jar"
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="bb36004beb02b69562cbec9aa7d6a3cf16bf5d1b">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-15bee9ee93e42c44d923b905cf11d0da85725fd6.jar" />
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-63544bc32ff89dbb49a4926c097691657b32d43a.jar" />
     </item>
     <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="7215ac1f2fca947b9415a6ee2a1bf991364aab24">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-0dcaedf6a2b0808f1a17138afcfa0b19c4e4efec.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="0180d031a7b54dabb93b4af3869468b55dc938bd">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-1aa64df8de8bc498d2950dc5b79851b25bdc4ff2.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.3.0\classes.jar"
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="59652857a825fff0de62166fca1bc9553cc01abb">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-3679555a0795e4c3d774b522128118d900eedf80.jar" />
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-75770625e3389dccf1875a4195097e195717c023.jar" />
     </item>
     <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="5ea948d825957be6c4358c48422bee60eef2d487">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-a3140df1ad966d073f0b98789eb1aa69bb7e7f61.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\Blindroid\emojis\unspecified\classes.jar"
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="f29d6d2825cb2cf661b2431b48943e273d1cf93d">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-a310274cd8e2eea1cb2ea036c6228e93b9d75539.jar" />
+        sha1="a0ce76dfaccbfbd6c551ed2174280aaabe60fe47">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-3607b3945101b4cc3ffbd25c4456665179fb5d29.jar" />
     </item>
     <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\libGoogleAnalytics\libGoogleAnalytics.jar"
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="d5f42ff2c078847b6ab128c5eca39852de9a406a">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\libGoogleAnalytics-3351b847bf3e49f01223bded357b32ea854f9c38.jar" />
+        sha1="0180d031a7b54dabb93b4af3869468b55dc938bd">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-45f4116e1cc97833f59b35015497a4bee27c7ade.jar" />
     </item>
     <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="3b4ff5c39dace8f3b4ab4cab8191785547a0815f">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-1aaa373084a042840611a0c8caa056eb222a0692.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-b1588d6517eda98ca063504d11a885edae50d957.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-2369c80ce5ce308cd9155d3c5757d7a7e6637369.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="9c9dea9e85aceb09d95df5e6f7bc8a43fc286068">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-dd9f3695df266b1e82bdfb4f5f9aaea0389f6da5.jar" />
-    </item>
-    <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.3.0\classes.jar"
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="e5b9f5b0aa8dee788beb63d23832cb29ce771343">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-183c48ad9027649e6feb88295374ed738cee9980.jar" />
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-339c7a6759629a67bec700b4252f773e4efe4f73.jar" />
     </item>
     <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.3.0\classes.jar"
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="e5bf453b070c1e39297986144960e45afa0fdfad">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-3b52321b62c88167fbf68454a3e8f753475e7a99.jar" />
+        sha1="fe3e0c6de7cceed888b277487238b6af9a1cc299">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-9de20085bc728b2da2ef19bed053e54b6477267d.jar" />
     </item>
     <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\classes.jar"
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\classes.jar"
         jumboMode="false"
-        revision="21.1.1"
-        sha1="a0ce76dfaccbfbd6c551ed2174280aaabe60fe47">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-d911e795096509c3ccacd0d84d7d19daea363db9.jar" />
+        revision="21.1.2"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-bbd42bf60b4a8777333888b8733f0845c3224ac3.jar" />
     </item>
     <item
-        jar="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\classes.jar"
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3b4ff5c39dace8f3b4ab4cab8191785547a0815f">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-02625d5fa20371b5286d6e477459727a5c7269f6.jar" />
+    </item>
+    <item
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7215ac1f2fca947b9415a6ee2a1bf991364aab24">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-82e2a8501847752cc6a1896adec90c6658710b12.jar" />
+    </item>
+    <item
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.pnikosis\materialish-progress\1.5\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="75c54c470e19b251749e6e6c2cf3d73c0b50aa64">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-ac51705d60565a0238dd752373525d1eebf25a3f.jar" />
+    </item>
+    <item
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="5ea948d825957be6c4358c48422bee60eef2d487">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-306bc80cd59ee1ad856bc3a5be00aa65b56cf9d0.jar" />
+    </item>
+    <item
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4f4fe3c23776540625f3c2844152a7510fddf9f1">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-532e69a4b3143257c381ab9afad47d61e979c8cd.jar" />
+    </item>
+    <item
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-3a9696ce938da4c8b546284cc09b04682570109f.jar" />
+    </item>
+    <item
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0708ef60917bf94913fe9ef972a655b99462dca7">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-8bd437c8622bdaea3daa93cb6487d001ed56f6b1.jar" />
+    </item>
+    <item
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="b2c07cdb814fe988ad05f7b4d767a841514a5991">
-        <dex dex="C:\Users\xtianrock\Android studioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-f636ee84cd22e5cd7dd53082578c384b076416c4.jar" />
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-d7c2543f7d5ea8319cf3f96424ea39f11f54a24d.jar" />
+    </item>
+    <item
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-f7d793c6b03cac3596eb894fbc5d48efa29d978b.jar" />
+    </item>
+    <item
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-e201e258094580af4b6b3778049d38449d080029.jar" />
+    </item>
+    <item
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="565a01f90f1529f73362707c4c185d0623a68782">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\classes-04176ee7440b14a790eba4d97eacc5cffd8315ca.jar" />
+    </item>
+    <item
+        jar="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\libGoogleAnalytics\libGoogleAnalytics.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d5f42ff2c078847b6ab128c5eca39852de9a406a">
+        <dex dex="C:\Users\xtianrock\AndroidStudioProjects\Blindroid\app\build\intermediates\pre-dexed\debug\libGoogleAnalytics-397facc67892b0595402c9fb578a061a7986919b.jar" />
     </item>
 
 </items>

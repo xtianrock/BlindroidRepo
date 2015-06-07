@@ -13,8 +13,6 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/emojis" />
             <option value="$PROJECT_DIR$/libGoogleAnalytics" />
-            <option value="$PROJECT_DIR$/libGoogleAnalyticsServices" />
-            <option value="$PROJECT_DIR$/libGoogleAnalytics_" />
           </set>
         </option>
       </GradleProjectSettings>

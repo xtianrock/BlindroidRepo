@@ -6,9 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/emojis/emojis.iml" filepath="$PROJECT_DIR$/emojis/emojis.iml" />
       <module fileurl="file://$PROJECT_DIR$/libGoogleAnalytics/libGoogleAnalytics.iml" filepath="$PROJECT_DIR$/libGoogleAnalytics/libGoogleAnalytics.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libGoogleAnalyticsServices/libGoogleAnalyticsServices_.iml" filepath="$PROJECT_DIR$/libGoogleAnalyticsServices/libGoogleAnalyticsServices_.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libGoogleAnalytics_/libGoogleAnalytics_.iml" filepath="$PROJECT_DIR$/libGoogleAnalytics_/libGoogleAnalytics_.iml" />
     </modules>
   </component>
 </project>
-

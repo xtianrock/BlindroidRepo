@@ -117,4 +117,4 @@
         android:layout_below="@id/emojis_tab"
         android:background="#8f8f8f"/>
 </RelativeLayout>
-<!-- From: file:/C:/Users/xtianrock/Android%20studioProjects/Blindroid/emojis/src/main/res/layout/emojicons.xml -->
+<!-- From: file:/C:/Users/xtianrock/AndroidStudioProjects/Blindroid/emojis/src/main/res/layout/emojicons.xml -->

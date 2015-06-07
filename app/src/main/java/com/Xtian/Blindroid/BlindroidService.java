@@ -4,12 +4,10 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.res.AssetFileDescriptor;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
@@ -25,8 +23,6 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
@@ -36,12 +32,13 @@ public class BlindroidService extends Service implements IAccelerometerListener,
 
     private boolean screenOff;
     public enum phoneStates{IDLE,RINGING,OFFHOOK,CALL};
-    public phoneStates state = phoneStates.IDLE;
+    private phoneStates state = phoneStates.IDLE;
     static ArrayList<Contact> contacts = new ArrayList<>();
-    ClaseGlobal vGlobal;
+    public static final String ENDCALL = "endCall";
+    public static final String SPEAKER = "speaker";
+    Commons commons;
     SharedPreferences prefs;
     BroadcastReceiver screenReceiver;
-    private NotificationManagerCompat notificationManagerCompat;
 
     //Vacia los contactos y los vuelve a cargar cuando se produce un cambio en la bd contactos.
     private ContentObserver contactsObserver = new ContentObserver(new Handler()) {
@@ -75,11 +72,11 @@ public class BlindroidService extends Service implements IAccelerometerListener,
         registerReceiver(screenReceiver, filter);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        vGlobal = (ClaseGlobal) getApplicationContext();
+        commons = (Commons) getApplicationContext();
 
         Toast.makeText(getBaseContext(), R.string.activado,Toast.LENGTH_SHORT).show();
-        getNameNumber();
 
+        getNameNumber();
         Log.i("xtian", "onCreate");
 
     }
@@ -89,39 +86,36 @@ public class BlindroidService extends Service implements IAccelerometerListener,
 
         NotificationManagerCompat notificationManagerCompat;
 
-        Intent intentSpeaker = new Intent(this, ActivityColgar.class);
-        intentSpeaker.putExtra("metodo", 1);
-        intentSpeaker.setAction("altavoz");
-
+        Intent intentSpeaker = new Intent(this, PhoneActionsActivity.class);
+        intentSpeaker.setAction(SPEAKER);
         PendingIntent pendingIntentSpeaker = PendingIntent.getActivity(this, 0, intentSpeaker, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Intent intentColgar = new Intent(this, ActivityColgar.class);
-        intentColgar.putExtra("metodo", 0);
-        intentSpeaker.setAction("colgar");
-
+        Intent intentColgar = new Intent(this, PhoneActionsActivity.class);
+        intentColgar.setAction(ENDCALL);
         PendingIntent pendingIntentColgar = PendingIntent.getActivity(this, 0, intentColgar, PendingIntent.FLAG_UPDATE_CURRENT);
 
 // Create the action
         NotificationCompat.Action actionColgar =
-                new NotificationCompat.Action.Builder(R.drawable.blindroid_icon,
-                        "Colgar", pendingIntentColgar)
+                new NotificationCompat.Action.Builder(R.drawable.endcall,
+                        getString(R.string.colgar_noti), pendingIntentColgar)
                         .build();
 
         NotificationCompat.Action actionSpeaker =
-                new NotificationCompat.Action.Builder(R.drawable.blindroid_icon,
-                        "Altavoz", pendingIntentSpeaker)
+                new NotificationCompat.Action.Builder(R.drawable.speaker,
+                        getString(R.string.altavoz_noti), pendingIntentSpeaker)
                         .build();
 
         // the main notification that launches the greeting UI on the handheld
         Notification notification = new NotificationCompat.Builder(this)
-                .setContentText(vGlobal.getNombreLlamada())
+                .setContentText(Commons.getFullName(this.getApplicationContext(),commons.getCallPhone()))
                 .setContentTitle("Llamada en curso")
                 .setSmallIcon(R.drawable.blindroid_logo)
                 .setAutoCancel(true)
                 .extend(new NotificationCompat.WearableExtender()
                         .addAction(actionColgar)
                         .addAction(actionSpeaker)
-                        .setBackground(BitmapFactory.decodeStream(openPhoto(vGlobal.getIdLlamada()))))
+                        .setBackground(BitmapFactory.decodeStream(
+                                Commons.openPhoto(this.getApplicationContext(),commons.getCallPhone()))))
                 .build();
         notificationManagerCompat = NotificationManagerCompat.from(this);
         notificationManagerCompat.notify(002, notification);
@@ -132,16 +126,15 @@ public class BlindroidService extends Service implements IAccelerometerListener,
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        //Creo la notificacion
 
-        Intent ajustes = new Intent(BlindroidService.this, MainActivity.class);
+        Intent ajustes = new Intent(BlindroidService.this, SettingsActivity.class);
         PendingIntent touch = PendingIntent.getActivity(this, 0, ajustes, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder bBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.blindroid_icon)
                         .setContentTitle(getString(R.string.app_name))
                         .setContentText(getString(R.string.abre_ajustes))
-                                //.setAutoCancel(true)
+                         //.setAutoCancel(true)
                         .setOngoing(true)
                         .setContentIntent(touch)
                         .setPriority(Notification.PRIORITY_MIN);
@@ -167,8 +160,6 @@ public class BlindroidService extends Service implements IAccelerometerListener,
         }
         Log.i("xtian", "onStartCommand del servicio, screenOff:" + screenOff);
 
-
-        // con sticky mantengo el servicio hasta que se le ordene parar
         return START_STICKY;
     }
 
@@ -199,31 +190,35 @@ public class BlindroidService extends Service implements IAccelerometerListener,
         String[] projection = new String[]{
                 ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
                 ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
-                ContactsContract.CommonDataKinds.Phone.NUMBER};
-        Cursor names = getContentResolver().query(
+                ContactsContract.CommonDataKinds.Phone.NUMBER
+        };
+        Cursor contacts = getContentResolver().query(
                 uri, projection, null, null, null);
-        int indexName = names.getColumnIndex(
+        int indexName = contacts.getColumnIndex(
                 ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
-        int indexID = names.getColumnIndex(
+        int indexID = contacts.getColumnIndex(
                 ContactsContract.CommonDataKinds.Phone.CONTACT_ID);
-        int indexNumber = names.getColumnIndex(
+        int indexNumber = contacts.getColumnIndex(
                 ContactsContract.CommonDataKinds.Phone.NUMBER);
-        names.moveToFirst();
+        contacts.moveToFirst();
+        String countryCode = Commons.getCountryZipCode(this);
         do {
             //Aqui relleno los dos
-            ClaseGlobal vGlobal = new ClaseGlobal();
+
             //Reemplazo los caracteres acentuados por los normales
-            String nombre = vGlobal.reemplazarCaracteresRaros(names.getString(indexName)).toLowerCase();
-            String nombreOriginal = names.getString(indexName);
-            String codPais = vGlobal.getCountryZipCode(this);
-            String numero = vGlobal.prepararNumero(names.getString(indexNumber), codPais);
-            numero = codPais + numero;
-            // Toast.makeText(getBaseContext(),numero,Toast.LENGTH_SHORT).show();
-            String id = names.getString(indexID);
-            Contact cont = new Contact(nombre, nombreOriginal, numero, id);
-            contacts.add(cont);
-        } while (names.moveToNext());
-        names.close();
+            String fullName = contacts.getString(indexName);
+            String name = Commons.reemplazarCaracteresRaros(fullName).toLowerCase();
+            String phone =contacts.getString(indexNumber);
+            if(!phone.matches("^\\+(?:[0-9] ?){6,14}[0-9]$"))
+            {
+                phone = countryCode + phone;
+            }
+            //Log.i("recopilando numeros","modificado: "+phone.replaceAll(" ","")+"      original: "+contacts.getString(indexNumber));
+            long id = contacts.getLong(indexID);
+            Contact cont = new Contact(id,name, fullName, phone.replaceAll(" ",""));
+            BlindroidService.contacts.add(cont);
+        } while (contacts.moveToNext());
+        contacts.close();
     }
 
 
@@ -238,12 +233,12 @@ public class BlindroidService extends Service implements IAccelerometerListener,
     @Override
     public void onDoubleShake(float force) {
         if (state==phoneStates.OFFHOOK) {
-            if (prefs.getBoolean("colgar", false)) {
+            if (prefs.getBoolean("endCall", false)) {
                 Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 v.vibrate(200);
-                final ClaseGlobal vGlobal = (ClaseGlobal) getApplicationContext();
+                final Commons vGlobal = (Commons) getApplicationContext();
                 try {
-                    vGlobal.colgar();
+                    vGlobal.endCall();
                 } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
                     e.printStackTrace();
                 }
@@ -256,11 +251,10 @@ public class BlindroidService extends Service implements IAccelerometerListener,
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (state==phoneStates.IDLE) {
             v.vibrate(200);
-            Intent i = new Intent(this, ReconocimientoVoz.class);
+            Intent i = new Intent(this, RecognitionActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
             getApplication().startActivity(i);
-            Log.i("xtian", "OnShake.");
         }
 
 
@@ -271,17 +265,7 @@ public class BlindroidService extends Service implements IAccelerometerListener,
         mAudioManager.setSpeakerphoneOn(speaker);
     }
 
-    public InputStream openPhoto(long contactId) {
-        Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
-        Uri displayPhotoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.DISPLAY_PHOTO);
-        try {
-            AssetFileDescriptor fd =
-                    getContentResolver().openAssetFileDescriptor(displayPhotoUri, "r");
-            return fd.createInputStream();
-        } catch (IOException e) {
-            return null;
-        }
-    }
+
 
 
     @Override
@@ -289,19 +273,16 @@ public class BlindroidService extends Service implements IAccelerometerListener,
         state=phoneStates.IDLE;
         if (ProximityManager.isListening())
             ProximityManager.stopListening();
-        if (vGlobal.getNotificationActive()) {
-            vGlobal.setNotificationActive(false);
-            notificationManagerCompat = NotificationManagerCompat.from(BlindroidService.this);
+        if (commons.getNotificationActive()) {
+            commons.setNotificationActive(false);
+            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(BlindroidService.this);
             notificationManagerCompat.cancel(002);
         }
-
-        Log.i("xtian", "Estado idle");
     }
 
     @Override
     public void onStateRinging() {
         state=phoneStates.RINGING;
-        Log.i("xtian", "Estado ringing");
     }
 
     @Override
@@ -309,15 +290,13 @@ public class BlindroidService extends Service implements IAccelerometerListener,
         state=phoneStates.OFFHOOK;
         if(ProximityManager.isSupported(this))
         ProximityManager.startListening(this);
-        vGlobal.setNotificationActive(true);
+        commons.setNotificationActive(true);
         wearNotification();
-        Log.i("xtian", "Estado offHook");
     }
 
     @Override
     public void onStateCall() {
         state=phoneStates.CALL;
-        Log.i("xtian", "Estado calling");
     }
 
     @Override
@@ -331,7 +310,6 @@ public class BlindroidService extends Service implements IAccelerometerListener,
             }
             setSpeaker(false);
         }
-        Log.i("xtian", "proximity near");
     }
 
     @Override
@@ -345,7 +323,6 @@ public class BlindroidService extends Service implements IAccelerometerListener,
             }
             setSpeaker(true);
         }
-        Log.i("xtian", "proximity far");
     }
 
 }

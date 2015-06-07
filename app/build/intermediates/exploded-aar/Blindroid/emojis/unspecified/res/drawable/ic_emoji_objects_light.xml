@@ -30,4 +30,4 @@
         android:drawable="@drawable/ic_emoji_objects_light_activated" />
     <item android:drawable="@drawable/ic_emoji_objects_light_normal" />
 </selector>
-<!-- From: file:/C:/Users/xtianrock/Android%20studioProjects/Blindroid/emojis/src/main/res/drawable/ic_emoji_objects_light.xml -->
+<!-- From: file:/C:/Users/xtianrock/AndroidStudioProjects/Blindroid/emojis/src/main/res/drawable/ic_emoji_objects_light.xml -->

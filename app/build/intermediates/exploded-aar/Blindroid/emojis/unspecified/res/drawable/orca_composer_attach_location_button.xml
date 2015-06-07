@@ -18,4 +18,4 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true" android:drawable="@drawable/orca_attach_location_pressed"/>
     <item android:drawable="@drawable/orca_attach_location_normal"/>
-</selector><!-- From: file:/C:/Users/xtianrock/Android%20studioProjects/Blindroid/emojis/src/main/res/drawable/orca_composer_attach_location_button.xml -->
+</selector><!-- From: file:/C:/Users/xtianrock/AndroidStudioProjects/Blindroid/emojis/src/main/res/drawable/orca_composer_attach_location_button.xml -->
