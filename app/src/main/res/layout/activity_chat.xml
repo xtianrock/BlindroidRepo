@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/chat_background"
+    android:orientation="vertical"  >
+    <include
+        android:id="@+id/action_bar"
+        layout="@layout/action_bar"
+        />
+
+    <fragment
+        android:id="@+id/msg_list"
+        android:name="com.Xtian.Blindroid.MessagesFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:elevation="8dp"
+        android:background="@color/green" >
+
+        <ImageView
+            android:id="@+id/emoji_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:src="@drawable/emoticon"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="4dp" />
+        <ImageView
+            android:id="@+id/send_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/send"
+            android:layout_alignBottom="@+id/emoji_btn"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+        <github.ankushsachdeva.emojicon.EmojiconEditText
+            android:id="@+id/emojicon_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/send_btn"
+            android:layout_toRightOf="@id/emoji_btn"
+            android:layout_toEndOf="@id/emoji_btn"
+            android:layout_toLeftOf="@id/send_btn"
+            android:layout_toStartOf="@id/send_btn"
+            android:inputType="textCapSentences"
+            android:layout_alignParentBottom="true"
+            emojicon:emojiconSize="28sp" />
+    </RelativeLayout>
+
+</LinearLayout>

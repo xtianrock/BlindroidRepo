@@ -12,6 +12,10 @@ import java.sql.SQLException;
  * Created by xtianrock on 10/05/2015.
  */
 
+
+/*
+--------------------------Esta clase no esta actualmente en uso, pero podria ser muy util en un futuro, por eso la mantengo aqui---------------------------------------------
+ */
 public class DbAdapter
 {
     public static final String KEY_ID = "_id";
