@@ -6,15 +6,18 @@
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleHome" value="C:\Program Files\Android\Android Studio\gradle\gradle-2.2.1" />
+        <option name="gradleJvm" value="1.8" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/emojis" />
+            <option value="$PROJECT_DIR$/libGoogleAnalytics" />
             <option value="$PROJECT_DIR$/libGoogleAnalyticsServices" />
+            <option value="$PROJECT_DIR$/libGoogleAnalytics_" />
           </set>
         </option>
       </GradleProjectSettings>
     </option>
   </component>
 </project>
-

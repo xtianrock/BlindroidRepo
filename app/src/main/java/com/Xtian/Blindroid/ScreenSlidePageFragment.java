@@ -6,10 +6,11 @@ package com.Xtian.Blindroid;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.analytics.tracking.android.EasyTracker;
-import com.google.analytics.tracking.android.MapBuilder;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 
 /**
  * @author amatellanes
@@ -38,7 +40,7 @@ public class ScreenSlidePageFragment extends Fragment {
     private int color;
     private int index;
     private String text;
-    private Layout screen;
+    private String action;
 
     /**
      * Instances a new fragment with a background color and an index page.
@@ -47,7 +49,7 @@ public class ScreenSlidePageFragment extends Fragment {
      * @param index index page
      * @return a new page
      */
-    public static ScreenSlidePageFragment newInstance(int color, int index, String text) {
+    public static ScreenSlidePageFragment newInstance(int color, int index, String text,String action) {
 
         // Instantiate a new fragment
         ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
@@ -57,6 +59,7 @@ public class ScreenSlidePageFragment extends Fragment {
         bundle.putInt(BACKGROUND_COLOR, color);
         bundle.putInt(INDEX, index);
         bundle.putString("texto", text);
+        bundle.putString("action", action);
         fragment.setArguments(bundle);
         fragment.setRetainInstance(true);
 
@@ -75,12 +78,17 @@ public class ScreenSlidePageFragment extends Fragment {
                 : -1;
         this.text = (getArguments() != null) ? getArguments().getString("texto")
                 : "";
+        this.action = (getArguments() != null) ? getArguments().getString("action")
+                : "";
+        Tracker t = ((Commons) getActivity().getApplication()).getTracker(Commons.TrackerName.APP_TRACKER);
+        t.setScreenName("Tutorial");
+        t.send(new HitBuilders.ScreenViewBuilder().build());
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
 
         rootView = (ViewGroup) inflater.inflate(
                 R.layout.splash_layout, container, false);
@@ -90,7 +98,7 @@ public class ScreenSlidePageFragment extends Fragment {
 
         // Change the background color
         rootView.setBackgroundColor(this.color);
-        if (this.index == 6) {
+        if (this.index == 7) {
             ImageView iv = (ImageView) rootView.findViewById(R.id.imageView2);
             iv.setVisibility(View.GONE);
             Button bt = (Button) rootView.findViewById((R.id.button));
@@ -98,9 +106,7 @@ public class ScreenSlidePageFragment extends Fragment {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    gAnalyticTutorial();
-                    iniciarAjustes();
-                    iniciarServicio();
+                    startApp(action);
                 }
             });
         }
@@ -124,34 +130,27 @@ public class ScreenSlidePageFragment extends Fragment {
 
     }
 
-
-    private void iniciarAjustes() {
-        Intent mainIntent = new Intent(this.getActivity(), MainActivity.class);
-        startActivity(mainIntent);
+    private void startApp(String action)
+    {
+        SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String phone=prefs.getString("phoneNumber", "");
+        Intent intent;
+        if(action.equals("tutorial"))
+        {
+            intent = new Intent(this.getActivity(),MainActivity.class);
+        }
+        else if(phone.equals(""))
+        {
+            intent = new Intent(this.getActivity(), PhoneConfirmationActivity.class);
+        }
+        else
+        {
+            intent = new Intent(this.getActivity(), SettingsActivity.class);
+        }
+        startActivity(intent);
         getActivity().finish();
-
-
     }
 
-    private void iniciarServicio() {
 
-        Intent i = new Intent(this.getActivity(), BlindroidService.class);
-        i.putExtra("screen_state", false);
-        getActivity().startService(i);
-    }
-
-    public void gAnalyticTutorial() {
-        EasyTracker easyTracker = EasyTracker.getInstance(this.getActivity());
-
-        // MapBuilder.createEvent().build() returns a Map of event fields and values
-        // that are set and sent with the hit.
-        easyTracker.send(MapBuilder
-                        .createEvent("Splash_screen",     // Event category (required)
-                                "Tutorial",  // Event action (required)
-                                "Tutorial_completado",   // Event label
-                                null)            // Event value
-                        .build()
-        );
-    }
 
 }

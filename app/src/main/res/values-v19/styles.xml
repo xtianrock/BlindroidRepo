@@ -13,6 +13,19 @@
         <item name="android:popupMenuStyle">@style/MyApp.PopupMenu</item>
     </style>
 
+
+    <style name="chatTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+
+        <item name="android:itemTextAppearance">@style/PopupMenu.recipe</item>
+        <item name="android:popupMenuStyle">@style/MyApp.PopupMenu</item>
+        <!-- Main theme colors -->
+        <!--   your app branding color for the app bar -->
+        <item name="colorPrimary">@color/green</item>
+        <!--   darker variant for the status bar and contextual app bars -->
+
+    </style>
+
     <style name="MyActionButtonOverflow" parent="android:style/Widget.Holo.ActionButton.Overflow">
         <item name="android:src">@drawable/menu</item>
     </style>
@@ -24,6 +37,14 @@
 
     <style name="MyApp.PopupMenu" parent="android:Widget.Holo.Light.ListPopupWindow">
         <item name="android:popupBackground">#FF27AE60</item>
+    </style>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
+        <item name="actionOverflowButtonStyle">@style/OverFlow</item>
+    </style>
+
+    <style name="OverFlow" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/emoticon</item>
     </style>
 
 </resources>

@@ -11,8 +11,8 @@
     <string name="inicio">Start at boot</string>
     <string name="inicio_desc">Starts service at OS boot</string>
     <string name="llamada">Call</string>
-    <string name="altavoz">Speaker</string>
-    <string name="altavoz_desc">Actives handsfree</string>
+    <string name="altavoz">Auto hans free</string>
+    <string name="altavoz_desc">Actives proximity based handsfree</string>
     <string name="miscelanea">Miscellaneous</string>
     <string name="sensibilidad">Sensitivity</string>
     <string name="sensibilidad_desc">Modify shake force</string>
@@ -40,11 +40,12 @@
     <string name="info">Information</string>
     <string name="contacto">Contact</string>
     <string name="tuto1">Welcome, I will show you how it works.</string>
-    <string name="tuto2">Blindroid allows you to call contacts easily and fast...</string>
+    <string name="tuto2">Blindroid allows you to send messages and call your contacts easily and fast...</string>
     <string name="tuto3">...It doesn\'t matter in which application you are.</string>
     <string name="tuto4">Just shake your device, it will vibrate and a speech recognice window will appear...</string>
-    <string name="tuto5">When you hear the sound, say the contact name and that\'s it!</string>
-    <string name="tuto6">Now you know how it works, you can configure it as you prefer.</string>
+    <string name="tuto5">When you hear the sound, just say the contact name and that\'s it!</string>
+    <string name="tuto6">...and for sending messages say "message" before contact name</string>
+    <string name="tuto7">Now you know how it works, you can configure it as you prefer.</string>
     <string name="abre_ajustes">Touch to open</string>
     <string name="continuar">Click to continue</string>
     <string name="reintentar">Retry</string>
@@ -269,4 +270,9 @@
         <item>+260,ZM</item>
         <item>+263,ZW</item>
     </string-array>
+    <string name="title_activity_friends">friends</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_chat">ChatActivity</string>
 </resources>

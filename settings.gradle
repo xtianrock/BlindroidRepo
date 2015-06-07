@@ -1,1 +1,3 @@
-include ':app', ':libGoogleAnalyticsServices'
+include ':app', ':libGoogleAnalyticsServices_', ':libGoogleAnalytics', ':libGoogleAnalytics_'
+project(':libGoogleAnalyticsServices_').projectDir = new File('libGoogleAnalyticsServices')
+include ':emojis'

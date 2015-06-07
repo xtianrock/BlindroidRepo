@@ -11,8 +11,8 @@
     <string name="inicio">Activar al inicio</string>
     <string name="inicio_desc">Blindroid se activara en cada inicio</string>
     <string name="llamada">Llamada</string>
-    <string name="altavoz">Altavoz</string>
-    <string name="altavoz_desc">Activa el manos libres</string>
+    <string name="altavoz">Manos libres auto</string>
+    <string name="altavoz_desc">Manos libres automatico con sensor de proximidad</string>
     <string name="miscelanea">Miscelanea</string>
     <string name="sensibilidad">Sensibilidad</string>
     <string name="sensibilidad_desc">Ajusta la fuerza con la que debes agitar el phone</string>
@@ -40,11 +40,12 @@
     <string name="info">Información</string>
     <string name="contacto">Contacto</string>
     <string name="tuto1">Bienvenido, te enseñaré como funciona.</string>
-    <string name="tuto2">Blindroid te permite llamar a tus contactos de manera fácil y rápida...</string>
+    <string name="tuto2">Blindroid te permite llamar y enviar mensajes a tus contactos de manera fácil y rápida...</string>
     <string name="tuto3">...Sin importar que aplicación estés utilizando</string>
-    <string name="tuto4">Tan solo agita tu dispositivo, vibrará y aparecerá el cuadro de reconocimiento de voz</string>
-    <string name="tuto5">Cuando oigas el sonido dí el name del contacto y listo!</string>
-    <string name="tuto6">Ahora que sabes como funciona puedes configurarla a tu gusto.</string>
+    <string name="tuto4">Tan solo agita tu dispositivo y aparecerá el cuadro de reconocimiento de voz</string>
+    <string name="tuto5">Cuando oigas el sonido dí el nombre del contacto y listo!</string>
+    <string name="tuto6">Para enviar un mensaje dí "mensaje" justo antes</string>
+    <string name="tuto7">Ahora que sabes como funciona puedes configurarla a tu gusto.</string>
     <string name="abre_ajustes">Pulse para abrir</string>
     <string name="continuar">Pulsa para continuar</string>
     <string name="reintentar">Reintentar</string>

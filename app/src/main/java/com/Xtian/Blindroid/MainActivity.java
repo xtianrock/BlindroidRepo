@@ -1,320 +1,102 @@
 package com.Xtian.Blindroid;
 
+/**
+ * Created by xtianrock on 22/05/2015.
+ */
 
 import android.app.ActivityManager;
-import android.app.ActivityManager.RunningServiceInfo;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
-import android.view.Gravity;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.CursorAdapter;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.widget.FrameLayout;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.analytics.tracking.android.EasyTracker;
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, OnItemClickListener {
 
-
-public class MainActivity extends PreferenceActivity {
-	
-	
-	 
-	public boolean inicio;
-
-    private static void setBackground(View view, Drawable background) {
-        if (Build.VERSION.SDK_INT < 16) view.setBackgroundDrawable(background);
-        else view.setBackground(background);
-    }
-
-    private static Drawable getWindowBackgroundLayer(Drawable windowBackground, int layerId, String layerIdName) {
-        if (!(windowBackground instanceof LayerDrawable))
-            throw new IllegalStateException("Window background must be a LayerDrawable.");
-        final Drawable layer = ((LayerDrawable) windowBackground).findDrawableByLayerId(layerId);
-        if (layer == null) throw new IllegalStateException(
-                String.format("Window background must have layer with android:id=\"@+id/%s\"", layerIdName));
-        return layer;
-    }
+    ListView listView;
+    TextView emptyChats;
+    private ContactCursorAdapter ContactCursorAdapter;
+    private Toolbar toolbar;
+    private static String CHATLIST="chatlist";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-	  //Cargamos el fragment que contiene las opciones
-	  actualizarEstadoServicio();
+        setContentView(R.layout.activity_main);
+        listView = (ListView) findViewById(R.id.contactslist);
+        listView.setOnItemClickListener(this);
+        ContactCursorAdapter = new ContactCursorAdapter(this, null);
+        listView.setAdapter(ContactCursorAdapter);
+        toolbar = (Toolbar) findViewById(R.id.action_bar);
+        setSupportActionBar(toolbar);
+
+        emptyChats=(TextView)findViewById(R.id.emptyChats);
+
+        //actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME, ActionBar.DISPLAY_SHOW_CUSTOM);
+        toolbar.setTitle(R.string.app_name);
+        toolbar.setSubtitle("Chats");
 
 
-        addPreferencesFromResource(R.xml.opciones);
+        getSupportLoaderManager().initLoader(0, null, this);
 
-        final Resources res = getResources();
-        final boolean isKitkat = Build.VERSION.SDK_INT == 19;
+        //check version for overrinding recents style
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-      // replace window background to reduce overdraw
-      final Window window = getWindow();
-      final ViewGroup contentView = (ViewGroup)findViewById(android.R.id.content);
-      final View content = contentView.getChildAt(0);
-      final Drawable extendedWindowBackground = window.getDecorView().getBackground();
-      final Drawable windowBackground = !isKitkat ? extendedWindowBackground
-                                                  : getWindowBackgroundLayer(extendedWindowBackground,
-                                                                             R.id.window_background,
-                                                                             "window_background");
-      window.setBackgroundDrawable(null);
-      setBackground(content, windowBackground);
+            TypedValue typedValue = new TypedValue();
+            Resources.Theme theme = getTheme();
+            theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
+            int color = typedValue.data;
 
-      // add statusbar background
-      if (isKitkat)
-      {
-          // check if translucent bars are enabled
-          final int config_enableTranslucentDecor_id =
-                  res.getIdentifier("config_enableTranslucentDecor", "bool", "android");
-          if (config_enableTranslucentDecor_id > 0 && res.getBoolean(config_enableTranslucentDecor_id))
-          {
-              // get ActionBar container
-              final View actionBarContainer = findViewById("action_bar_container", "android");
-              if (actionBarContainer != null)
-              {
-                  // add layout listener (can't get margin before layout)
-                  //noinspection ConstantConditions
-                  actionBarContainer.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver
-                          .OnGlobalLayoutListener()
-                  {
-                      @SuppressWarnings("ConstantConditions")
-                      @Override
-                      public void onGlobalLayout()
-                      {
-                          // remove layout listener
-                          final ViewTreeObserver vto = actionBarContainer.getViewTreeObserver();
-                          if (Build.VERSION.SDK_INT < 16)
-                              vto.removeGlobalOnLayoutListener(this);
-                          else vto.removeOnGlobalLayoutListener(this);
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.blindroid_logo);
+            ActivityManager.TaskDescription td = new ActivityManager.TaskDescription(null, bm, color);
 
-                          // create and add statusbar background view
-                          final Drawable statusBarBackground = getWindowBackgroundLayer(extendedWindowBackground,
-                                                                                        R.id.statusbar_background,
-                                                                                        "statusbar_background");
-                          final int statusBarHeight =
-                                  ((ViewGroup.MarginLayoutParams)actionBarContainer.getLayoutParams()).topMargin;
-                          final View statusBarView = new View(MainActivity.this);
-                          setBackground(statusBarView, statusBarBackground);
-                          final FrameLayout.LayoutParams statusBarBackground_lp = new FrameLayout.LayoutParams(
-                                  ViewGroup.LayoutParams.MATCH_PARENT, statusBarHeight,
-                                  Gravity.TOP | Gravity.FILL_HORIZONTAL);
-                          contentView.addView(statusBarView, 0, statusBarBackground_lp);
+            setTaskDescription(td);
+            bm.recycle();
 
-                          // shift content under actionbar
-                          final ViewGroup.MarginLayoutParams content_lp =
-                                  (ViewGroup.MarginLayoutParams)content.getLayoutParams();
-                          content_lp.topMargin = getActionBar().getHeight() + statusBarHeight;
-                          content.setLayoutParams(content_lp);
-                      }
-                  });
-              }
-          }
-      }
-
-
-        //Creo el listener para el "bot�n" que inicia y detiene el servicio
-      Preference activaServicio = (Preference)findPreference("servicio");
-
-        activaServicio.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            public boolean onPreferenceClick(Preference arg0) {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(arg0.getContext());
-                boolean servicio=prefs.getBoolean("servicio", false);
-	    	   if (servicio)
-	    	   {
-	    		 iniciarServicio();
-	    	   } else {
-                   detenerServicio();
-               }
-                return true;
-            }
-
-
-        });
-
-
-        // Listener para los cambios de sensibilidad
-        final ListPreference lp = (ListPreference) getPreferenceManager().findPreference("sensibilidad");
-      lp.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
-        {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue)
-            {
-          	  	SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(preference.getContext());
-	                boolean servicio=prefs.getBoolean("servicio", false);
-	                if (servicio)
-	                {
-	                	//Reinicio el servicio para actualizar la sensibilidad
-	               	 iniciarServicio();
-	                }
-
-                return true;
-            }
-
-
-      });
-    }
-
-    private void iniciarServicio() {
-
-        Intent i = new Intent(this, BlindroidService.class);
-        i.putExtra("screen_state", false);
-		 startService(i);
-    }
-
-  private void detenerServicio() {
-      stopService(new Intent(this, BlindroidService.class));
-  }
-
-    // funcion que devuelve true o false en funcion de si el servicio esta activo o no
-    private boolean isMyServiceRunning() {
-		    ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-		    for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-                if ("com.Xtian.Blindroid.BlindroidService".equals(service.service.getClassName())) {
-                    return true;
-
-                }
-            }
-         return false;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        final ClaseGlobal vGlobal = (ClaseGlobal) getApplicationContext();
-        boolean busquedaGoogle= vGlobal.existePaquete("com.google.android.googlequicksearchbox");
-		  if (!busquedaGoogle)
-		  {
-			  InstalarBusquedaGoogle();
-		  }
-        actualizarEstadoServicio();
-        overridePendingTransition(R.anim.right_in, R.anim.left_out);
-	 }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        EasyTracker.getInstance(this).activityStart(this);
-
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        overridePendingTransition(R.anim.right_in, R.anim.left_out);
-
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        EasyTracker.getInstance(this).activityStop(this);
-
-    }
-
-    private void actualizarEstadoServicio() {
-        //edito el checkBox para que se adecue al estado del servicio
-        boolean servicioActivo = isMyServiceRunning();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = prefs.edit();
-        if (servicioActivo) {
-
-            editor.putBoolean("servicio", true);
-        } else {
-            editor.putBoolean("servicio", false);
         }
-        editor.commit();
-    }
 
-    public void InstalarBusquedaGoogle() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-
-        // set title
-        alertDialogBuilder.setTitle(R.string.busqueda_google);
-
-        // set dialog message
-        alertDialogBuilder
-                .setMessage(R.string.instalar_ahora)
-                .setCancelable(false)
-                .setPositiveButton(R.string.instalar, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // if this button is clicked, close
-                        // current activity
-                        try {
-                            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.googlequicksearchbox"));
-                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(i);
-                        } catch (android.content.ActivityNotFoundException anfe) {
-                            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id= com.google.android.googlequicksearchbox"));
-                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(i);
-                        }
-
-                    }
-                })
-                .setNegativeButton(R.string.despues, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // if this button is clicked, just close
-                        // the dialog box and do nothing
-                        finish();
-                        dialog.cancel();
-                    }
-                });
-
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.show();
-        TextView messageText = (TextView) alertDialog.findViewById(android.R.id.message);
-        messageText.setGravity(Gravity.CENTER);
-
-
-        // show it
-        alertDialog.show();
-
-    }
-
-    public View findViewById(String name, String pkg) {
-        final int id = getResources().getIdentifier(name, "id", pkg);
-        return id > 0 ? findViewById(id) : null;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.settings, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
+        // automat**cally handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.tutorial) {
-            //Limpio las preferencias.
-            SharedPreferences settings = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-            settings.edit().clear().commit();
-            //Reinicio la actividad.
-            Intent intent = new Intent().setClass(this, SplashScreen.class);
+            Intent intent = new Intent().setClass(this, SplashScreenActivity.class);
+            intent.setAction("tutorial");
             startActivity(intent);
-            detenerServicio();
             finish();
-            return true;
 
         } else if (id == R.id.compartir) {
             Intent intent = new Intent(Intent.ACTION_SEND);
@@ -338,8 +120,129 @@ public class MainActivity extends PreferenceActivity {
             emailIntent.setType("message/rfc822");
             startActivity(Intent.createChooser(emailIntent, "Email "));
         }
+        else if (id == R.id.settings) {
+
+            Intent intent = new Intent(this,SettingsActivity.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.putExtra(Commons.PROFILE_ID,arg3);
+        Log.i("profile_id", "" + arg3);
+        startActivity(intent);
+    }
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        DataProvider.refreshChatlist(this);
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        getSupportLoaderManager().initLoader(0, null, this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        CursorLoader loader = new CursorLoader(this,
+                Uri.withAppendedPath(DataProvider.CONTENT_URI_PROFILE,CHATLIST),
+                new String[]{"p.*","m.message","m.time"},
+                null,
+                null,
+                DataProvider.COL_TIME + " DESC");
+        return loader;
+    }
+
+    @Override
+    public void onLoadFinished(android.support.v4.content.Loader<Cursor> arg0, Cursor arg1) {
+        ContactCursorAdapter.swapCursor(arg1);
+        if(arg1.getCount()==0)
+            emptyChats.setVisibility(View.VISIBLE);
+        else
+            emptyChats.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onLoaderReset(android.support.v4.content.Loader<Cursor> arg0) {
+        ContactCursorAdapter.swapCursor(null);
+    }
+
+
+
+
+    public class ContactCursorAdapter extends CursorAdapter {
+
+        private LayoutInflater mInflater;
+
+        public ContactCursorAdapter(Context context, Cursor c) {
+            super(context, c, 0);
+            this.mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override public int getCount() {
+            return getCursor() == null ? 0 : super.getCount();
+        }
+
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            View itemLayout = mInflater.inflate(R.layout.chat_list, parent, false);
+            ViewHolder holder = new ViewHolder();
+            itemLayout.setTag(holder);
+            holder.name = (TextView) itemLayout.findViewById(R.id.contact_name);
+            holder.count = (TextView) itemLayout.findViewById(R.id.message_count);
+            holder.lastMessage = (TextView) itemLayout.findViewById(R.id.last_message);
+            holder.time = (TextView) itemLayout.findViewById(R.id.message_time);
+            holder.photo = (ImageView) itemLayout.findViewById(R.id.contact_photo);
+            return itemLayout;
+        }
+
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            ViewHolder holder = (ViewHolder) view.getTag();
+            holder.name.setText(cursor.getString(cursor.getColumnIndex(DataProvider.COL_NAME)));
+            String phone=cursor.getString(cursor.getColumnIndex(DataProvider.COL_PHONE));
+            String message=cursor.getString(cursor.getColumnIndex(DataProvider.COL_MESSAGE));
+            if (message.length()>25)
+                message = message.substring(0,22) + "...";
+            holder.lastMessage.setText(message);
+            holder.time.setText(Commons.getDisplayTime(cursor.getString(cursor.getColumnIndex(DataProvider.COL_TIME))));
+
+            int count = cursor.getInt(cursor.getColumnIndex(DataProvider.COL_COUNT));
+            if (count > 0){
+                holder.count.setVisibility(View.VISIBLE);
+                holder.count.setText(String.valueOf(count));
+            }else
+                holder.count.setVisibility(View.GONE);
+            holder.photo.setImageDrawable(Commons.getContactPhoto(context, phone));
+
+        }
+    }
+
+
+    private static class ViewHolder {
+        TextView name;
+        TextView count;
+        TextView lastMessage;
+        TextView time;
+        ImageView photo;
+    }
+
+
+
+
 
 }

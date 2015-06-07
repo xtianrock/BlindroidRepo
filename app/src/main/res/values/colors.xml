@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="verde">#ff27ae61</color>
-    <color name="celeste">#ff389fae</color>
-    <color name="naranja">#ffdb7425</color>
-    <color name="morado">#ff4844ae</color>
-    <color name="rojo">#ffff4a4c</color>
+    <color name="green">#ff27ae61</color>
+    <color name="darkGreen">#ff248543</color>
+    <color name="cyan">#ff00bcd4</color>
+    <color name="orange">#ffff5722</color>
+    <color name="blue">#ff448aff</color>
+    <color name="red">#fff44336</color>
+    <color name="purple">#ff7c4dff</color>
     <color name="gris">#ff6f6c64</color>
-    <color name="rosa">#ffbc66a0</color>
+    <color name="pink">#ffff4081</color>
+    <color name="amarillo">#ffd1c83d</color>
     <color name="button_normal">#929392</color>
     <color name="button_pressed">#c0c1c0</color>
+    <color name="chat_bubble">#ffffffff</color>
+    <color name="chat_background">#ffc3c3c3</color>
 
 </resources>

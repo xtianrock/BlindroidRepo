@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
-        android:background="@color/rojo"
+        android:background="@color/orange"
         android:drawableTop="@drawable/ok_icon"
         android:text="@string/continuar"
         android:textColor="#ffffffff"

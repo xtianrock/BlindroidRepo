@@ -1,17 +1,19 @@
 package com.Xtian.Blindroid;
 
-public class Contact {
-    String name;
-    String fullName;
-    String phone;
-    String id;
+import android.content.ContentValues;
+import android.content.Context;
 
-    public Contact(String name, String fullName, String phone, String id) {
+public class Contact {
+    private long id;
+    private String name;
+    private String fullName;
+    private String phone;
+
+    public Contact(long id, String name, String fullName, String phone) {
+        this.id = id;
         this.name = name;
         this.fullName = fullName;
         this.phone = phone;
-        this.id = id;
-
     }
 
     public String getName() {
@@ -30,12 +32,31 @@ public class Contact {
         return phone;
     }
 
-    public String getID() {
+    public long getID() {
         return id;
+    }
+
+    public void register(Context context)
+    {
+        if (!DataProvider.exist(context, this.phone.replace("+","")))
+        {
+            ContentValues profileValues = new ContentValues(2);
+            profileValues.put(DataProvider.COL_NAME, fullName);
+            profileValues.put(DataProvider.COL_PHONE, phone.replace("+",""));
+            context.getContentResolver().insert(DataProvider.CONTENT_URI_PROFILE, profileValues);
+        }
+
+    }
+    public void unreadMessage(Context context)
+    {
+        DataProvider.incrementCount(context,this.phone.replace("+",""));
     }
 
     @Override
     public String toString() {
         return this.fullName;
     }
+
+
+
 }
