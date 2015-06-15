@@ -39,7 +39,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
+/**
+ * Clase encargada de procesar el reconocimiento de voz
+ */
 public class RecognitionActivity extends Activity {
 
     public static final String PREDEFINED_REPLY = "Ok";
@@ -103,6 +105,11 @@ public class RecognitionActivity extends Activity {
         timer.schedule(task, 150);
     }
 
+    /**
+     * Obtiene el texto de un mensaje enviado desde Android Wear
+     * @param intent
+     * @return
+     */
     private CharSequence getMessageText(Intent intent) {
         Bundle remoteInput = RemoteInput.getResultsFromIntent(intent);
         if (remoteInput != null) {
@@ -157,6 +164,10 @@ public class RecognitionActivity extends Activity {
         }
     }
 
+    /**
+     * Procesa el resultado del reconocimiento de voz como llamada
+     * @param results
+     */
     private void actionCall(ArrayList<String> results)
     {
         ArrayList<Contact>contacts = Commons.getMatchingContacts(results);
@@ -174,6 +185,10 @@ public class RecognitionActivity extends Activity {
         }
     }
 
+    /**
+     * Procesa el resultado del reconocimiento de voz como mensaje
+     * @param results
+     */
     private void actionMessage(ArrayList<String> results)
     {
         ArrayList<String> names = processResults(results);
@@ -193,6 +208,12 @@ public class RecognitionActivity extends Activity {
                 break;
         }
     }
+
+    /**
+     * Elimina la palabra clave de cada elemento del ArryaList
+     * @param results
+     * @return
+     */
     private ArrayList<String> processResults(ArrayList<String> results)
     {
         ArrayList<String> posibleContacts=new ArrayList<>();
@@ -201,15 +222,14 @@ public class RecognitionActivity extends Activity {
             String name=result.replaceAll(keyword,"").trim();
             Log.i(TAG, name);
             posibleContacts.add(name);
-           /* for (int i=0;i<words.length;i++)
-            {
-                if(words[i].length()>2)
-                    words.
-            }*/
         }
         return posibleContacts;
     }
 
+    /**
+     * Construye el mensaje y s elo pasa al metodo confirmationDialog
+     * @param results
+     */
     private void actionBuildMessage(ArrayList<String> results)
     {
         String msg=results.get(0);
@@ -219,6 +239,11 @@ public class RecognitionActivity extends Activity {
         confirmationDialog(message);
 
     }
+
+    /**
+     * Envia el mensaje
+     * @param message mensaje a enviar
+     */
     private void send(Message message) {
         if(messageContact!=null)
         messageContact.register(this);
@@ -229,6 +254,10 @@ public class RecognitionActivity extends Activity {
         finish();
     }
 
+    /**
+     * Llama al contacto
+     * @param contact
+     */
     private void callContact(Contact contact) {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse("tel:" +contact.getPhone()));
@@ -244,6 +273,11 @@ public class RecognitionActivity extends Activity {
         //finish();
     }
 
+    /**
+     * Genera un cuadro de dialog con los resultados
+     * @param contacts
+     * @param mode
+     */
     private void dialog(final List<Contact> contacts,final int mode) {
 
         customDialog = new Dialog(this, R.style.Theme_Dialog_Translucent);
@@ -316,7 +350,11 @@ public class RecognitionActivity extends Activity {
     }
 
 
-
+    /**
+     * Genera un cuadro de dialogo que permite
+     * confirmar o cancelar el envio de un mensaje
+     * @param message
+     */
     private void confirmationDialog(final Message message) {
 
         customDialog = new Dialog(this, R.style.Theme_Dialog_Translucent);
@@ -328,7 +366,7 @@ public class RecognitionActivity extends Activity {
         final Button btRetry= (Button)customDialog.findViewById(R.id.retry);
 
         TextView name = (TextView) customDialog.findViewById(R.id.contact_name);
-        name.setText(Commons.getFullName(this,message.getReceiver()) );
+        name.setText(messageContact.getFullName());
 
         TextView contenido = (TextView) customDialog.findViewById(R.id.message);
         contenido.setText(message.getText());
@@ -390,6 +428,10 @@ public class RecognitionActivity extends Activity {
     }
 
 
+    /**
+     * Comprueba si existe acceso a internet
+     * @return
+     */
     public boolean isOnline() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
@@ -398,7 +440,10 @@ public class RecognitionActivity extends Activity {
     }
 
 
-
+    /**
+     * Adapta el tamano del listView al numero de elementos
+     * @param listView
+     */
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null)
@@ -417,6 +462,7 @@ public class RecognitionActivity extends Activity {
         }
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+
         listView.setLayoutParams(params);
         listView.requestLayout();
     }
