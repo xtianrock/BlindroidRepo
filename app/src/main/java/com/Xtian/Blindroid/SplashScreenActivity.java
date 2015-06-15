@@ -19,6 +19,9 @@ import android.view.WindowManager;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Splash screen
+ */
 public class SplashScreenActivity extends FragmentActivity {
 
     // Set the duration of the splash screen
@@ -100,6 +103,9 @@ public class SplashScreenActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Inicia la actividad principal
+     */
     private void startMainActivity() {
         Intent i = new Intent(this, BlindroidService.class);
         i.putExtra("screen_state", false);

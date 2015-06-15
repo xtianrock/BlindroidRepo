@@ -19,14 +19,12 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -291,7 +289,6 @@ public class RecognitionActivity extends Activity {
             ListView dialog_ListView = (ListView)customDialog.findViewById(R.id.dialoglist);
             ArrayAdapter<Contact> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, contacts);
             dialog_ListView.setAdapter(adapter);
-            setListViewHeightBasedOnChildren(dialog_ListView);
             dialog_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
                 @Override
@@ -440,32 +437,7 @@ public class RecognitionActivity extends Activity {
     }
 
 
-    /**
-     * Adapta el tamano del listView al numero de elementos
-     * @param listView
-     */
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null)
-            return;
 
-        int desiredWidth = ListView.MeasureSpec.makeMeasureSpec(listView.getWidth(), ListView.MeasureSpec.UNSPECIFIED);
-        int totalHeight = 0;
-        View view = null;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            view = listAdapter.getView(i, view, listView);
-            if (i == 0)
-                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-            listView.measure(desiredWidth, ListView.MeasureSpec.UNSPECIFIED);
-            totalHeight += view.getMeasuredHeight();
-        }
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-
-        listView.setLayoutParams(params);
-        listView.requestLayout();
-    }
 
 
 

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:padding="6dip"
+    android:layout_margin="10dip"
+   >
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:adjustViewBounds="true"
+        android:gravity="center_vertical"
+        android:elevation="6dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/blindroid_icon" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/avatar"
+        android:layout_toStartOf="@+id/avatar"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:textColor="@android:color/secondary_text_light"
+            android:layout_below="@+id/text2"
+            android:layout_alignRight="@+id/text2"
+            android:layout_alignEnd="@+id/text2" />
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:ellipsize="marquee"
+            android:background="@drawable/message_box"
+            android:elevation="6dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/primary_text_light" />
+    </RelativeLayout>
+
+</RelativeLayout><!-- From: file:/C:/Users/xtianrock/AndroidStudioProjects/Blindroid/app/src/main/res/layout/chat_right.xml -->

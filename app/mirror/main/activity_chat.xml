@@ -1,0 +1,15 @@
+<!-- [ Mirror metadata ] generatedAt: 1433609509165 -->
+<!-- Generated screen file. Fill the id tags below with content with
+which to populate your previewed layout. For a complete specification
+of sample data, please see http://jimulabs.com/sample-data-specifications/ 
+
+Valid attributes on <screen> tag: theme="@style/someTheme" inEditMode="false" overlay="@drawable/mockup" -->
+<screen>
+    <_content layout="@layout/activity_chat">
+        <!-- ImageView Examples:
+        <emoji_btn src="@drawable/image_resource" />
+        <emoji_btn src="relative_path/image.jpg" /> -->
+        <emoji_btn />
+        <send_btn />
+    </_content>
+</screen>

@@ -34,6 +34,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Clase global
+ */
 public class Commons extends Application {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -41,10 +44,10 @@ public class Commons extends Application {
             DateFormat.getDateInstance(), DateFormat.getTimeInstance()};
     boolean notificationActive = false;
     public String callPhone;
-
+    public static final String LOGTAG = "blindroid-log";
     public static final String PROFILE_ID = "profile_id";
 
-    //parameters recognized by demo server
+    //parametros reconocidos por el servidor
     public static final String FROM = "chatId";
     public static final String REG_ID = "regId";
     public static final String MSG = "msg";
@@ -59,53 +62,107 @@ public class Commons extends Application {
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
+    /**
+     * Devuelve true o false dependiendo de si
+     * la notificacion de llamada en curso esta activa
+     * @return notificationActive
+     */
     public boolean getNotificationActive() {
         return notificationActive;
     }
 
+    /**
+     * Asigna un valor booleano ala variable
+     * @param notificationActive
+     */
     public void setNotificationActive(boolean notificationActive) {
         this.notificationActive = notificationActive;
     }
+
+    /**
+     * Devuelve el telefono de la persona
+     * con la que se mantiene la llamada
+     * @return callPhone
+     */
     public String getCallPhone() {
         return callPhone;
     }
 
+    /**
+     * Establece el telefono de la persona
+     * con la que mantiene una llamada
+     * @param callPhone
+     */
     public void setCallPhone(String callPhone) {
         this.callPhone = callPhone;
     }
 
+    /**
+     * Devuelve el telefono del usuario
+     * @return phone
+     */
     public static String getPhoneNumber() {
         return prefs.getString("phone", "");
     }
+
+    /**
+     * Establece el telefono del usuario
+     * @param phone
+     */
     public static void setPhoneNumber(String phone) {
         prefs.edit().putString("phone", phone).apply();
     }
 
+    /**
+     * Obtiene el id del usuario con el que se mantiene
+     * la conversacion
+     * @return
+     */
     public static String getCurrentChat() {
         return prefs.getString("current_chat", "");
     }
+
+    /**
+     * Establece el id del contacto con el cual
+     * se mantiene la conversacion
+     * @param chatId
+     */
     public static void setCurrentChat(String chatId) {
         prefs.edit().putString("current_chat", chatId).apply();
     }
 
-    public static boolean isNotify() {
-        return prefs.getBoolean("notifications_new_message", true);
-    }
 
+    /**
+     * Obyiene el tono de notificacion predeterminado del sistema
+     * @return ringtone
+     */
     public static String getRingtone() {
         return prefs.getString("notifications_new_message_ringtone", android.provider.Settings.System.DEFAULT_NOTIFICATION_URI.toString());
     }
 
+    /**
+     * Devuelve la url del servidor
+     * @return server url
+     */
     public static String getServerUrl() {
         return Constants.SERVER_URL;
     }
 
-    public static String getSenderId() { return  Constants.SENDER_ID;
+    /**
+     * Obtiene el api_key de GCM
+     * @return
+     */
+    public static String getApiKey() { return  Constants.Api_key;
     }
 
 
     HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();
 
+    /**
+     * Obtiene el tracker de google analitycs
+     * @param trackerId
+     * @return synchronized
+     */
     public synchronized Tracker getTracker(TrackerName trackerId) {
 
         if (!mTrackers.containsKey(trackerId)) {
@@ -122,6 +179,11 @@ public class Commons extends Application {
         E_COMMERCE_TRACKER,
     }
 
+    /**
+     * Obtiene el id del telefono dado
+     * @param number
+     * @return id
+     */
    public static long getID(String number) {
         for (Contact contact:BlindroidService.contacts) {
             if (contact.getPhone().equals(number)) {
@@ -131,25 +193,16 @@ public class Commons extends Application {
         return -1;
     }
 
-    public static String getFullName(Context context, String number) {
-        if(!number.contains("+"))
-            number="+"+number;
-        String countryCode = getCountryZipCode(context);
-        String numeroPreparado = prepararNumero(number, countryCode);
-        numeroPreparado = countryCode + numeroPreparado;
-        for (Contact contact:BlindroidService.contacts) {
-            if (contact.getPhone().equals(numeroPreparado)) {
-                return contact.getFullName();
-            }
-        }
-        return null;
-    }
-
+    /**
+     * Obtiene el Stream con la foto del contacto
+     * @param context
+     * @param phone
+     * @return inpuStream
+     */
     public static InputStream openPhoto(Context context,String phone) {
         if(!phone.contains("+"))
             phone="+"+phone;
         long contactID=getID(phone);
-        //Log.d("openPhoto", "id: " + contactID+"     phone : " + phone);
         Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactID);
         Uri displayPhotoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.DISPLAY_PHOTO);
         try {
@@ -161,6 +214,12 @@ public class Commons extends Application {
         }
     }
 
+    /**
+     * Obtiene la foto en formato redondo del contacto con el telefono dado.
+     * @param context
+     * @param phone
+     * @return
+     */
     public static RoundedBitmapDrawable getContactPhoto(Context context, String phone) {
         InputStream inputStream= openPhoto(context, phone);
         Bitmap bitmap;
@@ -180,12 +239,13 @@ public class Commons extends Application {
 
     }
 
-    public static String prepararNumero(String numero, String countryCode) {
-        numero = numero.replace(countryCode, "");
-        return numero.replaceAll(" ","");
-    }
 
-    public static String reemplazarCaracteresRaros(String input) {
+    /**
+     * Remplaza caracteres acentuados por normales.
+     * @param input
+     * @return
+     */
+    public static String replaceAcentedCharacters(String input) {
         // Cadena de caracteres original a sustituir.
         String original = "áàäéèëíìïóòöúùuÁÀÄÉÈËÍÌÏÓÒÖÚÙÜ";
         // Cadena de caracteres ASCII que reemplazar�n los originales.
@@ -194,10 +254,15 @@ public class Commons extends Application {
         for (int i = 0; i < original.length(); i++) {
             // Reemplazamos los caracteres especiales.
             output = output.replace(original.charAt(i), ascii.charAt(i));
-        }//for i
+        }
         return output;
     }
 
+    /**
+     * Comprueba la existencia de un paquete
+     * @param paquete
+     * @return
+     */
     public boolean existePaquete(String paquete) {
         final Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -225,7 +290,12 @@ public class Commons extends Application {
         return activityExists;
     }
 
-
+    /**
+     * Detiene una llamada
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
     public void endCall() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         TelephonyManager tm = (TelephonyManager) getApplicationContext()
                 .getSystemService(Context.TELEPHONY_SERVICE);
@@ -249,6 +319,11 @@ public class Commons extends Application {
 
     }
 
+    /**
+     * Obtiene el codigo de pais de un telefono dado
+     * @param context
+     * @return zipCode
+     */
     public static String getCountryZipCode(Context context) {
         String CountryID = "";
         String CountryZipCode = "";
@@ -267,6 +342,11 @@ public class Commons extends Application {
         return CountryZipCode;
     }
 
+    /**
+     * Obtiene un contacto por su telefono
+     * @param phone
+     * @return contact
+     */
     public static Contact getContactByPhone(String phone)
     {
         Contact contact=null;
@@ -278,13 +358,18 @@ public class Commons extends Application {
         return contact;
     }
 
+    /**
+     * Obtiene los contactos que coinciden con el criterio de busqueda dado
+     * @param results
+     * @return arraylist de contactos
+     */
     public static ArrayList<Contact> getMatchingContacts(ArrayList<String> results)
     {
         ArrayList<Contact> contacts= new ArrayList<>();
 
         for (String result:results)
         {
-            String name = Commons.reemplazarCaracteresRaros(result).toLowerCase();
+            String name = Commons.replaceAcentedCharacters(result).toLowerCase();
             for (Contact contact:BlindroidService.contacts)
             {
                 if(contact.getName().contains(name))
@@ -304,6 +389,11 @@ public class Commons extends Application {
         return contacts;
     }
 
+    /**
+     * Da formato a la fecha dada
+     * @param datetime
+     * @return datetime formateado
+     */
     public static String getDisplayTime(String datetime) {
         try {
             Date now=new Date();

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <include
+        android:id="@+id/action_bar"
+        layout="@layout/action_bar"
+        />
+    <TextView
+        android:id="@+id/emptyChats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="No existen conversaciones, para iniciar una, agite y diga: mensaje + nombre del contacto"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingEnd="20dp"
+        android:visibility="invisible"
+        android:layout_marginTop="50dp"
+        android:textColor="@android:color/secondary_text_dark" />
+
+    <ListView
+        android:id="@+id/contactslist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout><!-- From: file:/C:/Users/xtianrock/AndroidStudioProjects/Blindroid/app/src/main/res/layout/activity_main.xml -->

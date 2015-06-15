@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.Xtian.blindroid"
+    android:versionCode="13"
+    android:versionName="2.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="22" />
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.Xtian.Blindroid.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="true" />
+
+    <application
+        android:name="com.Xtian.Blindroid.Commons"
+        android:allowBackup="true"
+        android:icon="@drawable/blindroid_icon"
+        android:label="@string/app_name"
+        android:logo="@drawable/blindroid_logo"
+        android:theme="@style/Theme.AppCompat.Light" >
+        <activity
+            android:name="com.Xtian.Blindroid.SettingsActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:parentActivityName="com.Xtian.Blindroid.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ExtendedActionBar" />
+        <activity
+            android:name="com.Xtian.Blindroid.MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:theme="@style/chatTheme" />
+        <activity
+            android:name="com.Xtian.Blindroid.SplashScreenActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ExtendedActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.Xtian.Blindroid.RecognitionActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <service
+            android:name="com.Xtian.Blindroid.BlindroidService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="ServiceBoot" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="com.Xtian.Blindroid.PhoneActionsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <receiver android:name="com.Xtian.Blindroid.BootReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.Xtian.Blindroid.PhoneStateReceiver" >
+            <intent-filter android:priority="0" >
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.Xtian.Blindroid.SmsReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter android:priority="999" >
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.Xtian.Blindroid.Gcm.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="com.example.xtianrock.gcm_test" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.Xtian.Blindroid.PhoneConfirmationActivity"
+            android:label="@string/title_activity_friends"
+            android:theme="@style/chatTheme" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.gms.analytics.globalConfigResource"
+            android:resource="@xml/analytics_global_config" />
+
+        <activity
+            android:name="com.Xtian.Blindroid.ChatActivity"
+            android:label="@string/title_activity_chat"
+            android:launchMode="standard"
+            android:parentActivityName="com.Xtian.Blindroid.MainActivity"
+            android:theme="@style/chatTheme" />
+
+        <provider
+            android:name="com.Xtian.Blindroid.DataProvider"
+            android:authorities="com.Xtian.Blindroid.provider"
+            android:exported="false" >
+        </provider>
+
+        <service
+            android:name="com.Xtian.Blindroid.NotificationIntentService"
+            android:exported="false" >
+        </service>
+    </application>
+
+</manifest>

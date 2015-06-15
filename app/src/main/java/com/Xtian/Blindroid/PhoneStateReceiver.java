@@ -7,7 +7,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 /**
- * Created by xtianrock on 17/04/2015.
+ * Esta pendiente de los cambios de estado del servicio de telefonia
  */
 public class PhoneStateReceiver extends BroadcastReceiver {
 
@@ -52,7 +52,10 @@ public class PhoneStateReceiver extends BroadcastReceiver {
         }
     }
 
-
+    /**
+     * Inicia la escucha del estado del servicio de telefonia
+     * @param IPhoneListener
+     */
     public static void startListening(IPhoneStateListener IPhoneListener) {
         listener = IPhoneListener;
     }

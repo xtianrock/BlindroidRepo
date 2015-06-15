@@ -1,0 +1,18 @@
+<!-- [ Mirror metadata ] generatedAt: 1433609509573 -->
+<!-- Generated screen file. Fill the id tags below with content with
+which to populate your previewed layout. For a complete specification
+of sample data, please see http://jimulabs.com/sample-data-specifications/ 
+
+Valid attributes on <screen> tag: theme="@style/someTheme" inEditMode="false" overlay="@drawable/mockup" -->
+<screen>
+    <_content layout="@layout/phone_confirmation">
+        <!-- TextView Examples:
+        <tvTitle text="@string/string_resource" />
+        <tvTitle text="Text literal" textSize="14sp" /> -->
+        <tvTitle />
+        <!-- ImageView Examples:
+        <imageView3 src="@drawable/image_resource" />
+        <imageView3 src="relative_path/image.jpg" /> -->
+        <imageView3 />
+    </_content>
+</screen>

@@ -1,0 +1,19 @@
+<!-- [ Mirror metadata ] generatedAt: 1433609509492 -->
+<!-- Generated screen file. Fill the id tags below with content with
+which to populate your previewed layout. For a complete specification
+of sample data, please see http://jimulabs.com/sample-data-specifications/ 
+
+Valid attributes on <screen> tag: theme="@style/someTheme" inEditMode="false" overlay="@drawable/mockup" -->
+<screen>
+    <_content layout="@layout/confirmation_dialog">
+        <!-- TextView Examples:
+        <contact_name text="@string/string_resource" />
+        <contact_name text="Text literal" textSize="14sp" /> -->
+        <contact_name />
+        <!-- ImageView Examples:
+        <contact_photo src="@drawable/image_resource" />
+        <contact_photo src="relative_path/image.jpg" /> -->
+        <contact_photo />
+        <message />
+    </_content>
+</screen>

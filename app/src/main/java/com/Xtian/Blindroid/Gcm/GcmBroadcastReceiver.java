@@ -3,7 +3,6 @@ package com.Xtian.Blindroid.Gcm;
  * Created by xtianrock on 01/05/2015.
  */
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +30,6 @@ public class GcmBroadcastReceiver extends WakefulBroadcastReceiver{
 
 
         startWakefulService(context, intentService);
-        setResultCode(Activity.RESULT_OK);
+        //setResultCode(Activity.RESULT_OK);
     }
 }

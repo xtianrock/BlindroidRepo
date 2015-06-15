@@ -10,6 +10,9 @@ import java.lang.reflect.InvocationTargetException;
 import static com.Xtian.Blindroid.BlindroidService.ENDCALL;
 import static com.Xtian.Blindroid.BlindroidService.SPEAKER;
 
+/**
+ * Activity que sera llamada por las acciones de la notificacion wear
+ */
 public class PhoneActionsActivity extends Activity {
 
     @Override
@@ -41,7 +44,9 @@ public class PhoneActionsActivity extends Activity {
         }
     }
 
-
+    /**
+     * Conmuta el estado del manos libres
+     */
     private void speakerToggle() {
         AudioManager mAudioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
         if (mAudioManager.isSpeakerphoneOn()) {

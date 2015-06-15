@@ -36,10 +36,10 @@ import github.ankushsachdeva.emojicon.EmojiconsPopup.OnEmojiconBackspaceClickedL
 import github.ankushsachdeva.emojicon.EmojiconsPopup.OnSoftKeyboardOpenCloseListener;
 import github.ankushsachdeva.emojicon.emoji.Emojicon;
 
-
+/**
+ * Activity que contienevarios fragment que conforman la ventana de chat
+ */
 public class ChatActivity extends ActionBarActivity implements OnClickListener, MessagesFragment.OnFragmentInteractionListener {
-
-
 
     private long profileId;
     private String profileName;
@@ -52,15 +52,16 @@ public class ChatActivity extends ActionBarActivity implements OnClickListener, 
     private EmojiconsPopup popup;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
-        profileId = getIntent().getLongExtra(Commons.PROFILE_ID, 0);
+        //Obtengo el id del contacto.
+        profileId = getIntent().getIntExtra(Commons.PROFILE_ID, 0);
+        //cancelo la notificacion si existiera
         NotificationManager notificationManager =(NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel((int) profileId);
+
         emojiButton = (ImageView) findViewById(R.id.send_btn);
         emojiButton.setOnClickListener(this);
         prepareEmojis();
@@ -73,7 +74,6 @@ public class ChatActivity extends ActionBarActivity implements OnClickListener, 
             toolbar.setTitle(profileName);
         }
         c.close();
-        Log.i("profile_phone", ""+profilePhone);
         Bitmap bitmap= BitmapFactory.decodeStream(Commons.openPhoto(this,profilePhone));
         if(bitmap==null)
         {
@@ -107,7 +107,7 @@ public class ChatActivity extends ActionBarActivity implements OnClickListener, 
         gcmUtil = new GcmUtil(getApplicationContext());
 
 
-        //check version for overrinding recents style
+        //Comprueba si la version es lollipop, para cambiar el estilo del panel de recientes
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
             TypedValue typedValue = new TypedValue();
@@ -202,9 +202,19 @@ public class ChatActivity extends ActionBarActivity implements OnClickListener, 
         super.onDestroy();
     }
 
+    /**
+     * Cambia la imagen de un icono
+     * @param iconToBeChanged icono a modificar
+     * @param drawableResourceId imagen para poner en el icono
+     */
     private void changeEmojiKeyboardIcon(ImageView iconToBeChanged, int drawableResourceId){
         iconToBeChanged.setImageResource(drawableResourceId);
     }
+
+    /**
+     * Realiza todas la operaciones necesarias para poder usar la libreria
+     * de emoticonos.
+     */
     private void prepareEmojis() {
         //emojis
         emojiconEditText = (EmojiconEditText) findViewById(R.id.emojicon_edit_text);

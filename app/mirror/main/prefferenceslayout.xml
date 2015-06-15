@@ -1,0 +1,7 @@
+<!-- [ Mirror metadata ] generatedAt: 1433593183595 -->
+<screen>
+    <_content layout="@layout/prefferenceslayout" >
+        <!-- Error creating screen file for file prefferenceslayout.xml:
+        Invalid reference: @+android:id/title -->
+    </_content>
+</screen>

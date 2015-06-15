@@ -9,18 +9,23 @@ import android.util.Log;
 
 import java.util.List;
 
-
+/**
+ * Clase encargada del control de acelerometro.
+ */
 public class AccelerometerManager {
 
     /**
      * Sensibilidad
      */
-    public static int threshold = 30;
+    public static int THRESHOLD = 30;
     static IAccelerometerListener listener;
     private static Context aContext = null;
-    private static long interval = 900000000;
+    private static long INTERVAL = 900000000;
     /**
-     * The listener that listen to events from the accelerometer listener
+     * Listener que captura los eventos de accelerometer listener
+     *
+     * Se ha eliminado el eje z para que no se active al dejar el telefono sobre una superficie horizontal
+     *
      */
     private static SensorEventListener sensorEventListener =
             new SensorEventListener() {
@@ -35,7 +40,7 @@ public class AccelerometerManager {
                 private float z = 0;
                 private float lastX = 0;
                 private float lastY = 0;
-                // private float lastZ = 0;
+                private float lastZ = 0;
                 private float force = 0;
 
                 public void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -43,18 +48,14 @@ public class AccelerometerManager {
 
                 public void onSensorChanged(SensorEvent event) {
                     synchronized (this) {
-                        // use the event timestamp as reference
-                        // so the manager precision won't depends
-                        // on the IAccelerometerListener implementation
-                        // processing time
+
                         now = event.timestamp;
 
                         x = event.values[0];
                         y = event.values[1];
-                        z = event.values[2];
+                        //z = event.values[2];
 
-                        // if not interesting in shake events
-                        // just remove the whole if then else block
+
                         if (lastUpdate == 0) {
                             lastUpdate = now;
                             lastShake = now;
@@ -68,17 +69,16 @@ public class AccelerometerManager {
 
                             if (timeDiff > 0) {
 
-                    /* Si pongo el eje z da problemas al dejar el movil en la mesa.
-                     * force = Math.abs(x + y + z - lastX - lastY - lastZ);*/
+                                //force = Math.abs(x + y + z - lastX - lastY - lastZ);
                                 force = Math.abs(x + y - lastX - lastY);
 
-                                if (Float.compare(force, threshold) > 0) {
+                                if (Float.compare(force, THRESHOLD) > 0) {
 
-                                    if (now - lastShake >= interval) {
+                                    if (now - lastShake >= INTERVAL) {
 
                                         // trigger shake event
                                         listener.onShake(force);
-                                    } else if (now - lastShake >= interval / 5 && now - lastShake < interval) {
+                                    } else if (now - lastShake >= INTERVAL / 5 && now - lastShake < INTERVAL) {
                                         // trigger double shake event
                                         listener.onDoubleShake(force);
                                     }
@@ -108,14 +108,14 @@ public class AccelerometerManager {
     private static boolean running = false;
 
     /**
-     * devuelve true si el aceleromtro esta activo
+     * Devuelve true si el aceleromtro esta activo
      */
     public static boolean isListening() {
         return running;
     }
 
     /**
-     * desactiva el listener
+     * Desactiva el listener
      */
     public static void stopListening() {
         running = false;
@@ -124,9 +124,9 @@ public class AccelerometerManager {
                 sensorManager.unregisterListener(sensorEventListener);
             }
         } catch (Exception e) {
-            Log.i("xtian", e.getMessage());
+            Log.i(Commons.LOGTAG, e.getMessage());
         }
-        Log.i("xtian", "Acelerometro desactivado");
+        //Log.i(Commons.LOGTAG, "Acelerometro desactivado");
     }
 
     /**
@@ -152,35 +152,34 @@ public class AccelerometerManager {
     }
 
     /**
-     * Configure the listener for shaking
+     * configura el listener para agitar
+     *
      * @param threshold
-     *             minimum acceleration variation for considering shaking
+     *            minima variacion de aceleracion para que se considere como agitado
      */
     public static void configure(int threshold) {
-        AccelerometerManager.threshold = threshold;
+        AccelerometerManager.THRESHOLD = threshold;
 
     }
 
     /**
-     * Registers a listener and start listening
+     * registra el listener y lo inicia
      * @param IAccelerometerListener
-     *             callback for accelerometer events
+     *              callback para los eventos de acelerometro
      */
     public static void startListening(IAccelerometerListener IAccelerometerListener) {
 
         sensorManager = (SensorManager) aContext.getSystemService(Context.SENSOR_SERVICE);
 
-        // Take all sensors in device
         List<Sensor> sensors = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER);
 
         if (sensors.size() > 0) {
 
             sensor = sensors.get(0);
-            // Register Accelerometer Listener
             sensorManager.registerListener(sensorEventListener, sensor, SensorManager.SENSOR_DELAY_GAME);
             running=true;
             listener = IAccelerometerListener;
-            Log.i("xtian", "Acelerometro activado");
+            Log.i(Commons.LOGTAG, "Acelerometro activado");
 
         }
 
@@ -188,14 +187,12 @@ public class AccelerometerManager {
     }
 
     /**
-     * Configures threshold and interval
-     * And registers a listener and start listening
+     * Configura el umbral, registra el listener y lo inicia
+     *
      * @param IAccelerometerListener
-     *             callback for accelerometer events
+     *             callback para los eventos de acelerometro
      * @param threshold
-     *             minimum acceleration variation for considering shaking
-
-     *             minimum interval between to shake events
+     *            minima variacion de aceleracion para que se considere como agitado
      */
     public static void startListening(IAccelerometerListener IAccelerometerListener, int threshold) {
         configure(threshold);

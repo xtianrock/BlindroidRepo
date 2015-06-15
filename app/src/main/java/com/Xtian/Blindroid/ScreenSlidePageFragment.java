@@ -1,8 +1,5 @@
 package com.Xtian.Blindroid;
 
-/**
- * Created by Cristian on 11/08/2014.
- */
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,18 +20,12 @@ import com.google.android.gms.analytics.Tracker;
 
 
 /**
- * @author amatellanes
+ * Fragments que seran usados dentro del pager
  */
 public class ScreenSlidePageFragment extends Fragment {
 
-    /**
-     * Key to insert the background color into the mapping of a Bundle.
-     */
-    private static final String BACKGROUND_COLOR = "color";
 
-    /**
-     * Key to insert the index page into the mapping of a Bundle.
-     */
+    private static final String BACKGROUND_COLOR = "color";
     private static final String INDEX = "index";
     ViewGroup rootView;
     private int color;
@@ -43,11 +34,11 @@ public class ScreenSlidePageFragment extends Fragment {
     private String action;
 
     /**
-     * Instances a new fragment with a background color and an index page.
+     * Intancia un nuevo fragment con un color de fondo y un numeor de pagina
      *
-     * @param color background color
-     * @param index index page
-     * @return a new page
+     * @param color
+     * @param index
+     * @return
      */
     public static ScreenSlidePageFragment newInstance(int color, int index, String text,String action) {
 
@@ -130,6 +121,10 @@ public class ScreenSlidePageFragment extends Fragment {
 
     }
 
+    /**
+     * Inicia una activity u otra en funcion de la accion pasada como parametro
+     * @param action
+     */
     private void startApp(String action)
     {
         SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(getActivity());

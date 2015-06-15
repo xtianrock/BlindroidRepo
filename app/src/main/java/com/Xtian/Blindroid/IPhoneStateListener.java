@@ -1,12 +1,29 @@
 package com.Xtian.Blindroid;
 
+
+
 /**
- * Created by xtianrock on 17/04/2015.
+ * Interfaz para gestionar el estado del telefono
  */
 public interface IPhoneStateListener {
 
+    /**
+     * El telefonose encuentra inactivo
+     */
     public void onStateIdle();
+
+    /**
+     * El telefono esta sonando
+     */
     public void onStateRinging();
+
+    /**
+     * El telefono s encuentra en una llamada
+     */
     public void onStateOffhook();
+
+    /**
+     * El telefono esta llamando
+     */
     public void onStateCall();
 }

@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
 
+/**
+ * Receiver que detecta la llegada de SMS entrantes
+ */
 public class SmsReceiver extends BroadcastReceiver {
 
     static ISmsListener listener;
@@ -44,10 +47,19 @@ public class SmsReceiver extends BroadcastReceiver {
         }
     }
 
+
+    /**
+     * Empieza a escuchar eventos de recepcion de SMS
+     * @param iSmsListener
+     */
     public static void startListening(ISmsListener iSmsListener)
     {
         listener=iSmsListener;
     }
+
+    /**
+     * Para a escuchar eventos de recepcion de SMS
+     */
     public static void stopListening()
     {
         listener=null;

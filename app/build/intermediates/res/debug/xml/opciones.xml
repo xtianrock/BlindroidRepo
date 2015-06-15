@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  <!--  <PreferenceCategory android:title="@string/servicio">
+        <CheckBoxPreference
+            android:key="servicio"
+            android:summary="@string/activar_desc"
+            android:title="@string/activar" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="inicio"
+            android:summary="@string/inicio_desc"
+            android:title="@string/inicio"
+
+            />
+    </PreferenceCategory> -->
+    <PreferenceCategory android:title="Mensajes">
+        <ListPreference
+            android:defaultValue="5"
+            android:dialogTitle="Seleccione una duración"
+            android:entries="@array/timeout"
+            android:entryValues="@array/timeout"
+            android:key="timeout"
+            android:summary="Segundos que durará la pantalla de confirmación"
+            android:title="Tiempo de espera"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/llamada">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="speaker"
+            android:summary="@string/altavoz_desc"
+            android:title="@string/altavoz" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="endCall"
+            android:summary="@string/colgar_agitando_desc"
+            android:title="@string/colgar_agitando" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="wear"
+            android:summary="@string/android_wear_desc"
+            android:title="@string/android_wear" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/miscelanea">
+        <ListPreference
+            android:defaultValue="29"
+            android:dialogTitle="@string/sensibilidad_tit"
+            android:entries="@array/Texto"
+            android:entryValues="@array/valor"
+            android:key="sensibilidad"
+            android:summary="@string/sensibilidad_desc"
+            android:title="@string/sensibilidad" />
+
+        <!--   <CheckBoxPreference
+           android:title="@string/pantalla_bloqueo"
+           android:defaultValue="false" 
+           android:summary="@string/pantalla_bloqueo_desc"
+           android:key="bloqueo" />  -->
+    </PreferenceCategory>
+
+</PreferenceScreen>
+<!-- From: file:/C:/Users/xtianrock/AndroidStudioProjects/Blindroid/app/src/main/res/xml/opciones.xml -->

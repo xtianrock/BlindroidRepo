@@ -10,5 +10,5 @@ public interface Constants {
     /**
      * Google API project id registered to use GCM.
      */
-	String SENDER_ID = "684417748517";//TODO provide project id e.g. 4815162342+
+	String Api_key = "684417748517";//TODO provide project id e.g. 4815162342+
 }

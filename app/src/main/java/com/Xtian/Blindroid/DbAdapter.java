@@ -9,12 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.sql.SQLException;
 
 /**
- * Created by xtianrock on 10/05/2015.
- */
-
-
-/*
---------------------------Esta clase no esta actualmente en uso, pero podria ser muy util en un futuro, por eso la mantengo aqui---------------------------------------------
+ * Clase actualmente no usada en la aplicacion, puede ser util en un futuro
  */
 public class DbAdapter
 {
@@ -37,6 +32,9 @@ public class DbAdapter
         this.context=context;
         helper=new DbHelper(context);
     }
+    /**
+     * Clase actualmente no usada en la aplicacion, puede ser util en un futuro
+     */
     private static class DbHelper extends SQLiteOpenHelper {
 
 

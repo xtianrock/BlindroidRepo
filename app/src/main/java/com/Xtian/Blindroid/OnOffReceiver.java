@@ -4,6 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+/**
+ * Detecta los cambios de estado de la pantalla
+ */
 public class OnOffReceiver extends BroadcastReceiver {
 
 
@@ -27,6 +30,10 @@ public class OnOffReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * Crea el servicio pasandole como parametro el estado de la pantalla
+     * @param context
+     */
     private void screenOnOff(Context context) {
         // Crea el servicio y le informa el estado de la pantalla
         Intent i = new Intent(context, BlindroidService.class);

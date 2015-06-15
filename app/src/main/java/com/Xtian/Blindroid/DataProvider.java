@@ -18,6 +18,9 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+/**
+ * Content provider de la aplicacion
+ */
 public class DataProvider extends ContentProvider {
 
     public static final Uri CONTENT_URI_MESSAGES = Uri.parse("content://com.Xtian.Blindroid.provider/messages");
@@ -30,7 +33,7 @@ public class DataProvider extends ContentProvider {
         INCOMING, OUTGOING
     }
 
-    //parameters recognized by demo server
+    //Parametros reconocidos por el servidor
     public static final String SENDER_EMAIL = "senderEmail";
     public static final String RECEIVER_EMAIL = "receiverEmail";
     public static final String REG_ID = "regId";
@@ -38,7 +41,7 @@ public class DataProvider extends ContentProvider {
 
 
 
-    // TABLE MESSAGE
+    // tabla message
     public static final String TABLE_MESSAGES = "messages";
     public static final String COL_TYPE = "type";
     public static final String COL_SENDER_PHONE = "senderPhone";
@@ -46,7 +49,7 @@ public class DataProvider extends ContentProvider {
     public static final String COL_MESSAGE = "message";
     public static final String COL_TIME = "time";
 
-    // TABLE PROFILE
+    // tabla profile
     public static final String TABLE_PROFILE = "profile";
     public static final String COL_NAME = "name";
     public static final String COL_PHONE = "phone";
@@ -206,6 +209,14 @@ public class DataProvider extends ContentProvider {
     }
 
 
+    /**
+     * Obtiene un determinado numero de mensajes tanto
+     * entrantes como salientes de un determinado telefono
+     * @param context
+     * @param phone
+     * @param limit numero de mensajes
+     * @return arraylist de mensajes
+     */
     public static ArrayList<Message> getMessages(Context context, String phone,String limit)
     {
         ArrayList <Message> messages = new ArrayList<>();
@@ -229,6 +240,11 @@ public class DataProvider extends ContentProvider {
         return messages;
     }
 
+    /**
+     * incrementa el campo contador de la tabla profiles
+     * @param context
+     * @param phone
+     */
     public static void incrementCount(Context context,String phone)
     {
         DbHelper dbHelper= new DbHelper(context);
@@ -237,11 +253,22 @@ public class DataProvider extends ContentProvider {
         context.getContentResolver().notifyChange(CONTENT_URI_PROFILE, null);
         db.close();
     }
+
+    /**
+     * funcion auxiliar para refrescar las vistas de los loader
+     * @param context
+     */
     public static void refreshChatlist(Context context)
     {
         context.getContentResolver().notifyChange(CONTENT_URI_PROFILE, null);
     }
 
+    /**
+     * obtiene el idde la talba profiles
+     * @param context
+     * @param senderPhone
+     * @return
+     */
     public static int getProfileId(Context context, String senderPhone)
     {
         DbHelper dbHelper= new DbHelper(context);
@@ -267,6 +294,12 @@ public class DataProvider extends ContentProvider {
 
     }
 
+    /**
+     * Comprueba si existe el contacto dado
+     * @param context
+     * @param senderPhone
+     * @return
+     */
     public static Boolean exist(Context context, String senderPhone)
     {
         DbHelper dbHelper= new DbHelper(context);
@@ -284,12 +317,20 @@ public class DataProvider extends ContentProvider {
 
     }
 
+    /**
+     * Clase encargada de crear la base de datos
+     */
     private static class DbHelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "blindroid.db";
         private static final int DATABASE_VERSION = 2;
         private static DbHelper mInstance = null;
 
 
+        /**
+         * obtiene una instancia de la base de datos
+         * @param ctx
+         * @return
+         */
         public static DbHelper getInstance(Context ctx) {
 
             // Use the application context, which will ensure that you

@@ -23,7 +23,6 @@ public class GcmUtil {
     private static final String TAG = "GcmUtil";
 
     public static final String PROPERTY_REG_ID = "registration_id";
-    public static final String PROPERTY_EMAIL = "email";
     private static final String PROPERTY_APP_VERSION = "appVersion";
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     
@@ -134,7 +133,7 @@ public class GcmUtil {
      * Registers the application with GCM servers asynchronously.
      * <p>
      * Stores the registration ID and the app versionCode in the application's
-     * shared preferences.
+     * shared preferences
      */
     private void registerInBackground(final GcmListener listener) {
     	registrationTask = new AsyncTask<Void, Void, Boolean>() {
@@ -151,7 +150,7 @@ public class GcmUtil {
 	                    if (gcm == null) {
 	                        gcm = GoogleCloudMessaging.getInstance(context);
 	                    }
-	                    regid = gcm.register(Commons.getSenderId());
+	                    regid = gcm.register(Commons.getApiKey());
 	                    msg = "Device registered, registration ID=" + regid;
 	                    ServerUtilities.register(Commons.getPhoneNumber(), regid);
                         storeRegistrationId(context, regid);

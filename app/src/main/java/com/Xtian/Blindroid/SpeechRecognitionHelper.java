@@ -14,10 +14,18 @@ import android.widget.TextView;
 import java.util.List;
 
 
+/**
+ * Clase helper que verifica e inicia el reconocimiento de voz
+ */
 public class SpeechRecognitionHelper {
 
     public static final int VOICE_RECOGNITION_REQUEST_CODE = 1;
 
+    /**
+     * Comprueba si esta instalada la busqueda de Google antes de iniciar el reconocimiento de voz
+     * @param ownerActivity activity a la que debe devolver los resultados
+     * @param promt mensaje que ha de mostrar en el cuadro de dialogo
+     */
 	public static void run(Activity ownerActivity, int promt) {
 
 		if (isSpeechRecognitionActivityPresented(ownerActivity)) {
@@ -27,7 +35,11 @@ public class SpeechRecognitionHelper {
 		}
 	}
 
-
+    /**
+     * Comprueba si estan instalada la busqueda de google
+     * @param ownerActivity
+     * @return
+     */
 	private static boolean isSpeechRecognitionActivityPresented(Activity ownerActivity) {
         try {
 
@@ -46,6 +58,11 @@ public class SpeechRecognitionHelper {
     }
 
 
+    /**
+     *  Inicia el reconocimiento de voz
+     * @param activity
+     * @param prompt
+     */
     public static void startVoiceRecognitionActivity(Activity activity ,int prompt) {
 
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -54,23 +71,23 @@ public class SpeechRecognitionHelper {
         intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5);
         activity.startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
     }
-	
 
 
+    /**
+     * Instala la busqueda de google
+     * @param activity
+     */
     private static void installGoogleVoiceSearch (final Activity activity) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
 
-        // set title
+
         alertDialogBuilder.setTitle(R.string.busqueda_google);
 
-        // set dialog message
         alertDialogBuilder
                 .setMessage(R.string.instalar_ahora)
                 .setCancelable(false)
                 .setPositiveButton(R.string.instalar, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // if this button is clicked, close
-                        // current activity
                         try {
                             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.googlequicksearchbox"));
                             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -85,20 +102,14 @@ public class SpeechRecognitionHelper {
                 })
                 .setNegativeButton(R.string.despues, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // if this button is clicked, just close
-                        // the dialog box and do nothing
-                        //finish();
                         dialog.cancel();
                     }
                 });
 
-        // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.show();
         TextView messageText = (TextView) alertDialog.findViewById(android.R.id.message);
         messageText.setGravity(Gravity.CENTER);
 
-
-        // show it
         alertDialog.show();
 
     }

@@ -33,6 +33,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+/**
+ * Clase que contiene la activity principal de la aplicacion
+ */
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, OnItemClickListener {
 
     ListView listView;
@@ -132,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
         Intent intent = new Intent(this, ChatActivity.class);
-        intent.putExtra(Commons.PROFILE_ID,arg3);
+        intent.putExtra(Commons.PROFILE_ID,(int)arg3);
         Log.i("profile_id", "" + arg3);
         startActivity(intent);
     }
@@ -180,8 +183,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoaderReset(android.support.v4.content.Loader<Cursor> arg0) {
         ContactCursorAdapter.swapCursor(null);
     }
-
-
 
 
     public class ContactCursorAdapter extends CursorAdapter {
@@ -232,7 +233,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
     }
 
-
+    /**
+     * Contiene las vistas usadas por el elemento holder
+     */
     private static class ViewHolder {
         TextView name;
         TextView count;

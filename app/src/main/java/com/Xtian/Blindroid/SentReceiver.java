@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.telephony.SmsManager;
 
+
+
 /**
- * Created by xtianrock on 12/05/2015.
+ * Receiver que detecta los cambios de estado en el envio de SMS
  */
 class SentReceiver extends BroadcastReceiver {
 
@@ -36,10 +38,20 @@ class SentReceiver extends BroadcastReceiver {
             }
         }
     }
+
+    /**
+     * Empieza a escuchar eventos de entrega de SMS
+     * @param iSendDeliver
+     */
     public static void startListening(ISendDeliver iSendDeliver)
     {
         listener=iSendDeliver;
     }
+
+
+    /**
+     * Para de escuchar eventos de entrega de SMS
+     */
     public static void stopListening()
     {
         listener=null;

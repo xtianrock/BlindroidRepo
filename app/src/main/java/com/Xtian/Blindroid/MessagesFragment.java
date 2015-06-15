@@ -23,6 +23,10 @@ import android.widget.TextView;
 
 import java.util.Date;
 
+/**
+ * Lista de fragments que contienen los
+ * mensajes queconforman la pantalla de chat
+ */
 public class MessagesFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
 
@@ -169,7 +173,9 @@ public class MessagesFragment extends ListFragment implements LoaderManager.Load
 
         }
     }
-
+    /**
+     * Contiene las vistas usadas por el elemento holder
+     */
     private static class ViewHolder {
         TextView time;
         TextView message;

@@ -19,6 +19,9 @@ import com.Xtian.Blindroid.Gcm.GcmUtil;
 
 import java.util.Random;
 
+/**
+ * Permite confirmar el numero de telefono y registrar en la aplicacion
+ */
 public class PhoneConfirmationActivity extends Activity implements ISmsListener,ISendDeliver {
 
     EditText etCountryCode;
@@ -50,7 +53,6 @@ public class PhoneConfirmationActivity extends Activity implements ISmsListener,
             public void onClick(View v) {
                 sendSms();
                 btSend.setVisibility(View.GONE);
-                Toast.makeText(PhoneConfirmationActivity.this,"Mensaje enviado, espere...",Toast.LENGTH_SHORT).show();
             }
         });
         gcmUtil = new GcmUtil(getApplicationContext());
@@ -65,6 +67,9 @@ public class PhoneConfirmationActivity extends Activity implements ISmsListener,
 
     }
 
+    /**
+     * Envia un Sms al numero introducido
+     */
     private void sendSms()
     {
         String smsBody=randomCode();
@@ -74,6 +79,10 @@ public class PhoneConfirmationActivity extends Activity implements ISmsListener,
         smsManager.sendTextMessage(phoneNumber, null, smsBody, sentPendingIntent, deliveredPendingIntent);
     }
 
+    /**
+     * Genera un codigo aleatorio para comprobar el telefono
+     * @return
+     */
     private String randomCode() {
         code = Integer.toString(random.nextInt((MAX - MIN) + 1) + MIN);
         return code;
@@ -135,12 +144,18 @@ public class PhoneConfirmationActivity extends Activity implements ISmsListener,
         }
     }
 
+    /**
+     * Inicia la Actividad principal
+     */
     private void startMainActivity() {
         Intent mainIntent = new Intent().setClass(this, MainActivity.class);
         startActivity(mainIntent);
         finish();
     }
 
+    /**
+     * Inicia el servicio
+     */
     private void startService() {
 
         Intent i = new Intent(this, BlindroidService.class);
@@ -150,7 +165,7 @@ public class PhoneConfirmationActivity extends Activity implements ISmsListener,
 
     @Override
     public void delivered() {
-        Toast.makeText(getBaseContext(), "SMS delivered", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), "Mensaje entregado", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -160,7 +175,7 @@ public class PhoneConfirmationActivity extends Activity implements ISmsListener,
 
     @Override
     public void sent() {
-        Toast.makeText(this, "SMS sent successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Mensaje enviado, espere...", Toast.LENGTH_SHORT).show();
     }
 
     @Override

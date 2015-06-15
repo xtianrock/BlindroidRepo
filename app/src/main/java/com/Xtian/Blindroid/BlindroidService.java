@@ -1,5 +1,6 @@
 package com.Xtian.Blindroid;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -13,6 +14,7 @@ import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Vibrator;
@@ -25,8 +27,10 @@ import android.widget.Toast;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-
-
+/**
+ *Servicio encargado del control de sensores y receviers,
+ *  asi como de cargar y procesar los datos de los contactos
+ */
 public class BlindroidService extends Service implements IAccelerometerListener, IPhoneStateListener, IProximityListener {
 
 
@@ -36,18 +40,19 @@ public class BlindroidService extends Service implements IAccelerometerListener,
     static ArrayList<Contact> contacts = new ArrayList<>();
     public static final String ENDCALL = "endCall";
     public static final String SPEAKER = "speaker";
+    public static final int WEAR_NOTIFICATION = 9998;
+    public static final int SERVICE_NOTIFICATION = 9999;
     Commons commons;
     SharedPreferences prefs;
     BroadcastReceiver screenReceiver;
 
-    //Vacia los contactos y los vuelve a cargar cuando se produce un cambio en la bd contactos.
     private ContentObserver contactsObserver = new ContentObserver(new Handler()) {
 
         @Override
         public void onChange(boolean selfChange) {
             super.onChange(selfChange);
             contacts.clear();
-            getNameNumber();
+            loadContacts();
         }
     };
 
@@ -64,7 +69,7 @@ public class BlindroidService extends Service implements IAccelerometerListener,
         //Registro el ContentObserver que estará pendiente de cambios en la base de datos de contactos.
         this.getContentResolver().registerContentObserver(ContactsContract.Contacts.CONTENT_URI, true, contactsObserver);
 
-        // instancio el receiver que controla el estado de la pantalla.
+        //Instancio el receiver que controla el estado de la pantalla.
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_USER_PRESENT);
@@ -76,16 +81,19 @@ public class BlindroidService extends Service implements IAccelerometerListener,
 
         Toast.makeText(getBaseContext(), R.string.activado,Toast.LENGTH_SHORT).show();
 
-        getNameNumber();
-        Log.i("xtian", "onCreate");
+        loadContacts();
+        Log.i(Commons.LOGTAG, "onCreate");
 
     }
 
+    /**
+     * Notificacion que se mostrará en el reloj mientras se este en una llamada
+     */
     private void wearNotification() {
-
 
         NotificationManagerCompat notificationManagerCompat;
 
+        //creo los pendingIntent
         Intent intentSpeaker = new Intent(this, PhoneActionsActivity.class);
         intentSpeaker.setAction(SPEAKER);
         PendingIntent pendingIntentSpeaker = PendingIntent.getActivity(this, 0, intentSpeaker, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -94,7 +102,7 @@ public class BlindroidService extends Service implements IAccelerometerListener,
         intentColgar.setAction(ENDCALL);
         PendingIntent pendingIntentColgar = PendingIntent.getActivity(this, 0, intentColgar, PendingIntent.FLAG_UPDATE_CURRENT);
 
-// Create the action
+        // creo las acciones
         NotificationCompat.Action actionColgar =
                 new NotificationCompat.Action.Builder(R.drawable.endcall,
                         getString(R.string.colgar_noti), pendingIntentColgar)
@@ -105,20 +113,19 @@ public class BlindroidService extends Service implements IAccelerometerListener,
                         getString(R.string.altavoz_noti), pendingIntentSpeaker)
                         .build();
 
-        // the main notification that launches the greeting UI on the handheld
+        // creo la notificacion
         Notification notification = new NotificationCompat.Builder(this)
-                .setContentText(Commons.getFullName(this.getApplicationContext(),commons.getCallPhone()))
-                .setContentTitle("Llamada en curso")
-                .setSmallIcon(R.drawable.blindroid_logo)
-                .setAutoCancel(true)
-                .extend(new NotificationCompat.WearableExtender()
-                        .addAction(actionColgar)
-                        .addAction(actionSpeaker)
-                        .setBackground(BitmapFactory.decodeStream(
-                                Commons.openPhoto(this.getApplicationContext(),commons.getCallPhone()))))
-                .build();
+                .setContentText(Commons.getContactByPhone(commons.getCallPhone()).getFullName())
+                        .setContentTitle("Llamada en curso")
+                        .setSmallIcon(R.drawable.blindroid_logo)
+                        .extend(new NotificationCompat.WearableExtender()
+                                .addAction(actionColgar)
+                                .addAction(actionSpeaker)
+                                .setBackground(BitmapFactory.decodeStream(
+                                        Commons.openPhoto(this.getApplicationContext(), commons.getCallPhone()))))
+                        .build();
         notificationManagerCompat = NotificationManagerCompat.from(this);
-        notificationManagerCompat.notify(002, notification);
+        notificationManagerCompat.notify(WEAR_NOTIFICATION, notification);
 
     }
 
@@ -139,14 +146,14 @@ public class BlindroidService extends Service implements IAccelerometerListener,
                         .setContentIntent(touch)
                         .setPriority(Notification.PRIORITY_MIN);
         Notification barNotif = bBuilder.build();
-        startForeground(1, barNotif);
+        startForeground(SERVICE_NOTIFICATION, barNotif);
 
         PhoneStateReceiver.startListening(this);
 
         try {
             screenOff = intent.getBooleanExtra("screen_state", false);
 
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
         if (!screenOff) {
             String sensibilidad = prefs.getString("sensibilidad", "29");
@@ -158,7 +165,7 @@ public class BlindroidService extends Service implements IAccelerometerListener,
                 AccelerometerManager.stopListening();
             }
         }
-        Log.i("xtian", "onStartCommand del servicio, screenOff:" + screenOff);
+        Log.i(Commons.LOGTAG, "onStartCommand del servicio, screenOff:" + screenOff);
 
         return START_STICKY;
     }
@@ -183,8 +190,16 @@ public class BlindroidService extends Service implements IAccelerometerListener,
         Log.i("xtian", "service onDestroy");
     }
 
+    /**
+     * Realiza la carga y procesamiento de los datos de los contactos.
+     */
+    private void loadContacts() {
 
-    private void getNameNumber() {
+        /*Necesitare un cursor para obtener los datos de los contactos
+        * para ello debo crear un uri con el content provider que usare,
+        * y un array de String projection con los campos que me quiero traer.
+        *
+         */
 
         Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
         String[] projection = new String[]{
@@ -194,6 +209,8 @@ public class BlindroidService extends Service implements IAccelerometerListener,
         };
         Cursor contacts = getContentResolver().query(
                 uri, projection, null, null, null);
+        //una vez tengo el cursor proceso los datos en cada iteracion.
+
         int indexName = contacts.getColumnIndex(
                 ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
         int indexID = contacts.getColumnIndex(
@@ -203,17 +220,14 @@ public class BlindroidService extends Service implements IAccelerometerListener,
         contacts.moveToFirst();
         String countryCode = Commons.getCountryZipCode(this);
         do {
-            //Aqui relleno los dos
-
             //Reemplazo los caracteres acentuados por los normales
             String fullName = contacts.getString(indexName);
-            String name = Commons.reemplazarCaracteresRaros(fullName).toLowerCase();
+            String name = Commons.replaceAcentedCharacters(fullName).toLowerCase();
             String phone =contacts.getString(indexNumber);
             if(!phone.matches("^\\+(?:[0-9] ?){6,14}[0-9]$"))
             {
                 phone = countryCode + phone;
             }
-            //Log.i("recopilando numeros","modificado: "+phone.replaceAll(" ","")+"      original: "+contacts.getString(indexNumber));
             long id = contacts.getLong(indexID);
             Contact cont = new Contact(id,name, fullName, phone.replaceAll(" ",""));
             BlindroidService.contacts.add(cont);
@@ -230,6 +244,7 @@ public class BlindroidService extends Service implements IAccelerometerListener,
     }
 
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public void onDoubleShake(float force) {
         if (state==phoneStates.OFFHOOK) {
@@ -276,7 +291,7 @@ public class BlindroidService extends Service implements IAccelerometerListener,
         if (commons.getNotificationActive()) {
             commons.setNotificationActive(false);
             NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(BlindroidService.this);
-            notificationManagerCompat.cancel(002);
+            notificationManagerCompat.cancel(WEAR_NOTIFICATION);
         }
     }
 

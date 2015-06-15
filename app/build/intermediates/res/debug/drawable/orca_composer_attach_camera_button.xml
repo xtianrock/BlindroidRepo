@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:drawable="@drawable/orca_attach_camera_pressed" />
+    <item android:drawable="@drawable/orca_attach_camera_normal" />
+</selector><!-- From: file:/C:/Users/xtianrock/AndroidStudioProjects/Blindroid/emojis/src/main/res/drawable/orca_composer_attach_camera_button.xml --><!-- From: file:/C:/Users/xtianrock/AndroidStudioProjects/Blindroid/app/build/intermediates/exploded-aar/Blindroid/emojis/unspecified/res/drawable/orca_composer_attach_camera_button.xml -->

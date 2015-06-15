@@ -1,9 +1,14 @@
 package com.Xtian.Blindroid;
 
 /**
- * Created by xtianrock on 11/05/2015.
+ * Interfaz para gestionar el acelerometro
  */
 public interface ISmsListener {
 
+  /**
+   * Mensaje recibido desde el sender
+   * @param sender
+   * @param message
+   */
   public void onReceiveSms(String sender, String message);
 }

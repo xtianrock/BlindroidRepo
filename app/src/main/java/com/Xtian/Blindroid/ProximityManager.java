@@ -10,7 +10,7 @@ import android.hardware.SensorManager;
 import java.util.List;
 
 /**
- * Created by xtianrock on 17/04/2015.
+ * Clase que gestiona el sensor de proximidad
  */
 public class ProximityManager {
     private static IProximityListener listener;
@@ -38,6 +38,11 @@ public class ProximityManager {
             };
 
 
+    /**
+     * Comprueba si el sensor de proximidad es soportado
+     * @param context
+     * @return
+     */
     public static boolean isSupported(Context context) {
         pContext = context;
         if (supported == null) {
@@ -53,10 +58,18 @@ public class ProximityManager {
         return supported;
     }
 
+    /**
+     * Comprueba si se estan recogiendo datos del sensor de proximidad
+     * @return
+     */
     public static boolean isListening() {
         return running;
     }
 
+    /**
+     * Inicia la recogida de datos del sensor de proximidad
+     * @param IProximityListener
+     */
     public static void startListening(IProximityListener IProximityListener) {
         listener=IProximityListener;
         sensorManager = (SensorManager) pContext.getSystemService(Context.SENSOR_SERVICE);
@@ -64,6 +77,10 @@ public class ProximityManager {
         sensorManager.registerListener(sensorEventListener, proximity, SensorManager.SENSOR_DELAY_GAME);
         running=true;
     }
+
+    /**
+     * Detiene la recogida de datos del sensor de proximidad
+     */
     public static void stopListening() {
         sensorManager.unregisterListener(sensorEventListener);
         running=false;

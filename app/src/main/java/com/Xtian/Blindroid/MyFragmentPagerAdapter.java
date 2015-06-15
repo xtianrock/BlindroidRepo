@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author amatellanes
+ * Clase que pagina fragments
  */
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
@@ -22,8 +22,7 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     /**
      * Constructor
      *
-     * @param fm interface for interacting with Fragment objects inside of an
-     *           Activity
+     * @param fm interfaz para interactuar con fragments dentro de activitys
      */
     public MyFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -31,9 +30,9 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     }
 
     /**
-     * Add a new fragment in the list.
+     * Añade un nuevo fragment a la lista
      *
-     * @param fragment a new fragment
+     * @param fragment
      */
     public void addFragment(Fragment fragment) {
         this.fragments.add(fragment);

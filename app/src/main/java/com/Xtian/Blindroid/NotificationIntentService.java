@@ -2,7 +2,6 @@ package com.Xtian.Blindroid;
 
 import android.app.IntentService;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.app.RemoteInput;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -22,7 +22,9 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.util.ArrayList;
 
-
+/**
+ * Intent service encargado de enviar las notificaciones de mensajes entrantes
+ */
 public class NotificationIntentService extends IntentService {
 
     final static String GROUP_BLINDROID = "group_blindroid";
@@ -63,9 +65,18 @@ public class NotificationIntentService extends IntentService {
         }
     }
 
+    /**
+     * Envia una notificacion de mensaje entrante
+     * @param context
+     * @param senderPhone
+     * @param name
+     * @param msg
+     * @param receiverPhone
+     */
     private void sendNotification(Context context, String senderPhone ,String name,String msg, String receiverPhone) {
 
-        long senderId=DataProvider.getProfileId(context,senderPhone);
+        int senderId=DataProvider.getProfileId(context,senderPhone);
+        Log.d("senderid",String .valueOf(senderId));
 
         // Intent for open chat on touch
         Intent intent = new Intent(context, ChatActivity.class);
@@ -153,69 +164,46 @@ public class NotificationIntentService extends IntentService {
                         .setStyle(secondPageStyle)
                         .build();
 
-    /*    // Create the notification
-        Notification n  = new NotificationCompat.Builder(context)
+        // Create a WearableExtender to add functionality for wearables
+        NotificationCompat.WearableExtender wearableExtender =
+                new NotificationCompat.WearableExtender()
+                        .addAction(wearReplyAction)
+                        .addPage(secondPageNotification)
+                        .setBackground(BitmapFactory.decodeStream(
+                                Commons.openPhoto(context, senderPhone)));
+
+
+
+// Create a NotificationCompat.Builder to build a standard notification
+// then extend it with the WearableExtender
+        Notification notif = new NotificationCompat.Builder(context)
                 .setContentTitle(name)
                 .setContentText(msg)
                 .setSmallIcon(R.drawable.blindroid_icon)
                 .setContentIntent(pIntent)
                 .setLargeIcon(bitmap)
                 .setGroup(GROUP_BLINDROID)
-                .extend(new NotificationCompat.WearableExtender()
-                        .addAction(wearReplyAction)
-                        .addPage(secondPageNotification)
-                        .setBackground(BitmapFactory.decodeStream(
-                                Commons.openPhoto(context, senderPhone))))
+                .extend(wearableExtender)
                 .addAction(phoneReplyAction)
                 .addAction(quickReplyAction)
+                .setPriority(Notification.PRIORITY_HIGH)
+                //.setCategory(Notification.CATEGORY_MESSAGE)
                 .build();
-
-        n.flags |= Notification.FLAG_AUTO_CANCEL;
-
-
-        NotificationManager notificationManager =(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (!TextUtils.isEmpty(Commons.getRingtone())) {
 
-            n.sound= Uri.parse(Commons.getRingtone());
-        }
-
-        if(!Commons.getCurrentChat().equals(senderPhone))
-        {
-            notificationManager.notify((int)senderId, n);
-            Log.i("senderId",String.valueOf(senderId));
-        }
-*/
-        Notification noti = new NotificationCompat.Builder(this)
-                .setContentTitle(name)
-                .setContentText(msg)
-                .setSmallIcon(R.drawable.blindroid_icon)
-                .setContentIntent(pIntent)
-                .setLargeIcon(bitmap)
-                .setGroup(GROUP_BLINDROID)
-                .extend(new NotificationCompat.WearableExtender()
-                        .addAction(wearReplyAction)
-                        .addPage(secondPageNotification)
-                        .setBackground(BitmapFactory.decodeStream(
-                                Commons.openPhoto(context, senderPhone))))
-                .addAction(phoneReplyAction)
-                .addAction(quickReplyAction)
-                .build();
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        // hide the notification after its selected
-        noti.flags |= Notification.FLAG_AUTO_CANCEL;
-
-        if (!TextUtils.isEmpty(Commons.getRingtone())) {
-
-            noti.sound= Uri.parse(Commons.getRingtone());
-        }
-
-        if(!Commons.getCurrentChat().equals(senderPhone))
-        {
-            notificationManager.notify((int)senderId, noti);
+            notif.sound= Uri.parse(Commons.getRingtone());
         }
 
 
+
+        NotificationManagerCompat notificationManagerCompat =
+                NotificationManagerCompat.from(context);
+
+
+        if(!Commons.getCurrentChat().equals(senderPhone)) {
+            notificationManagerCompat.notify(senderId, notif);
+        }
 
     }
 
