@@ -3,27 +3,11 @@
     tools:context="com.example.blindroid1.MainActivity">
 
     <item
-        android:id="@+id/tutorial"
+        android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/tutorial" />
-    <item
-        android:id="@+id/contacto"
-        android:orderInCategory="103"
-        android:showAsAction="never"
-        android:title="@string/contacto" />
-    <item
-        android:id="@+id/compartir"
-        android:icon="@drawable/compartir"
-        android:orderInCategory="101"
-        android:showAsAction="always"
-        android:title="@string/compartir" />
-    <item
-        android:id="@+id/info"
-        android:icon="@drawable/info"
-        android:orderInCategory="102"
-        android:showAsAction="always"
-        android:title="@string/info" />
+
 
 
 </menu>

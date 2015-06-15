@@ -1,13 +1,13 @@
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.1"
+    compileSdkVersion 22
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "com.Xtian.blindroid"
         minSdkVersion 16
-        targetSdkVersion 21
+        targetSdkVersion 22
     }
 
     buildTypes {
@@ -19,6 +19,11 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:21.0.0'
-    compile project(':libGoogleAnalyticsServices')
+    compile 'com.android.support:support-v4:22.1.1'
+    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'com.google.android.gms:play-services:7.3.0'
+    compile 'com.pnikosis:materialish-progress:1.5'
+    compile project(':libGoogleAnalytics')
+    compile project(':emojis')
+
 }
